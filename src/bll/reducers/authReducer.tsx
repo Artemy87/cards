@@ -1,4 +1,4 @@
-import { AppThunk } from '../store'
+import { AppThunk } from '../../dal/store/store'
 
 let initialState: InitialStateType = {}
 
