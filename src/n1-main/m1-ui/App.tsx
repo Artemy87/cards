@@ -11,15 +11,6 @@ import PasswordRecovery from '../../n2-features/f1-auth/a5-password-recovery/Pas
 import Password from '../../n2-features/f1-auth/a6-password/Password'
 
 function App() {
-  // useAppSelector(state => state)
-  // useAppDispatch()
-
-  //git
-  //
-
-  // signup регистрация
-  // использовать git fetch, так как он не обновляет(не перезатриает) рабочее состояние локального репозитория наш код подтягивая данные с удаленной репы, в отличии от git pull
-
   return (
     <div className="App">
       <Header />
