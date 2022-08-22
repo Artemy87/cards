@@ -1,9 +1,11 @@
-import { useFormik } from 'formik'
+import { FormikHelpers, useFormik } from 'formik'
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import Paper from '@mui/material/Paper/Paper'
 import { NavLink } from 'react-router-dom'
 import style from './Register.module.css'
+import { createUser } from 'bll/reducers/authReducer'
+import { RegisterType } from 'dal/api/authAPI'
 
 type FormikErrorType = {
   email?: string
@@ -20,32 +22,32 @@ const Register = () => {
       confirmPassword: '',
     },
 
-    validate: (contacts) => {
+    validate: (data) => {
       const errors: FormikErrorType = {}
       const minLengthPassword = 8
 
-      if (!contacts.email) {
+      if (!data.email) {
         errors.email = 'Укажите e-mail'
-      } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(contacts.email)) {
+      } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(data.email)) {
         errors.email = 'Некорректный E-mail адрес'
       }
 
-      if (!contacts.password) {
+      if (!data.password) {
         errors.password = 'Некорректный пороль'
-      } else if (contacts.password.length < minLengthPassword) {
+      } else if (data.password.length < minLengthPassword) {
         errors.password = 'Некорректный пороль'
       }
 
-      if (!contacts.confirmPassword) {
+      if (!data.confirmPassword) {
         errors.confirmPassword = 'Некорректный пороль'
-      } else if (contacts.confirmPassword.length < minLengthPassword) {
+      } else if (data.confirmPassword.length < minLengthPassword) {
         errors.confirmPassword = 'Некорректный пороль'
       }
 
       return errors
     },
-    onSubmit: (contacts) => {
-      //dispatch(preparationFormTC(contacts, cards))
+    onSubmit: ({ email, password }: RegisterType) => {
+      dispatch(createUser({ email, password }))
     },
   })
   return (
