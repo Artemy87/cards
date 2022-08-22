@@ -1,4 +1,4 @@
-import { FormikHelpers, useFormik } from 'formik'
+import { useFormik } from 'formik'
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import Paper from '@mui/material/Paper/Paper'
@@ -13,7 +13,7 @@ type FormikErrorType = {
   confirmPassword?: string
 }
 
-const Register = () => {
+export const Register = () => {
   const dispatch = useDispatch()
   const formik = useFormik({
     initialValues: {
@@ -69,5 +69,3 @@ const Register = () => {
     </Paper>
   )
 }
-
-export default Register
