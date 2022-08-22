@@ -1,23 +1,14 @@
-import { AppThunk } from '../../dal/store/store'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-let initialState: InitialStateType = {}
+const slice = createSlice({
+  name: 'auth',
+  initialState: { isLoggedIn: false },
+  reducers: {
+    changeLoggedIn: (state, action: PayloadAction<{ isLoggedIn: boolean }>) => {
+      state.isLoggedIn = action.payload.isLoggedIn
+    },
+  },
+})
 
-export const authReducer = (
-  state: InitialStateType = initialState,
-  action: any
-): InitialStateType => {
-  switch (action.type) {
-  }
-
-  return state
-}
-
-//thunk
-export const ThunkCreator = (): AppThunk => async (dispatch) => {
-  try {
-    //await
-  } catch (e) {}
-}
-
-//type
-type InitialStateType = {}
+export const authReducer = slice.reducer
+export const { changeLoggedIn } = slice.actions
