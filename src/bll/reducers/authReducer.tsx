@@ -1,4 +1,4 @@
-import { AppThunk } from '../../dal/store/store'
+import { AppThunk } from 'dal/store/store'
 
 let initialState: InitialStateType = {}
 
@@ -8,7 +8,6 @@ export const authReducer = (
 ): InitialStateType => {
   switch (action.type) {
   }
-
   return state
 }
 
