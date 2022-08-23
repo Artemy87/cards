@@ -43,6 +43,10 @@ export const Register = () => {
       } else if (data.confirmPassword.length < minLengthPassword) {
         errors.confirmPassword = 'Некорректный пороль'
       }
+      if (data.password !== data.confirmPassword) {
+        errors.confirmPassword = 'Поля должны совпадать'
+        errors.password = 'Поля должны совпадать'
+      }
 
       return errors
     },
@@ -56,9 +60,13 @@ export const Register = () => {
       <form onSubmit={formik.handleSubmit} className={style.form}>
         <input placeholder="Email" {...formik.getFieldProps('email')} />
         {formik.touched.email && formik.errors.email && <div>{formik.errors.email}</div>}
-        <input placeholder="Password" {...formik.getFieldProps('password')} />
+        <input type="password" placeholder="Password" {...formik.getFieldProps('password')} />
         {formik.touched.password && formik.errors.password && <div>{formik.errors.password}</div>}
-        <input placeholder="Confirm password" {...formik.getFieldProps('confirmPassword')} />
+        <input
+          type="password"
+          placeholder="Confirm password"
+          {...formik.getFieldProps('confirmPassword')}
+        />
         {formik.touched.confirmPassword && formik.errors.confirmPassword && (
           <div>{formik.errors.confirmPassword}</div>
         )}
