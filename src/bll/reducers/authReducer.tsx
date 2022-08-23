@@ -8,6 +8,7 @@ export const createUser = createAsyncThunk(
     await authAPI.register({ ...data, email: data.email.toLowerCase() })
   }
 )
+
 //Reducer
 const slice = createSlice({
   name: 'auth',
