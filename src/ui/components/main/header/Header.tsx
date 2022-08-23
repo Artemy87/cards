@@ -1,8 +1,8 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import s from './Header.module.css'
 import { AppBar, Toolbar } from '@mui/material'
 import incubatorLogo from './img/Group 753.svg'
+import { HeaderMenu } from 'ui/components/main/header/HeaderMenu/HeaderMenu'
 
 export const Header = () => {
   return (
@@ -10,17 +10,12 @@ export const Header = () => {
       <AppBar position="static" color="default" className={s.headerBlock}>
         <Toolbar className={s.toolBar}>
           <img src={incubatorLogo} alt="" />
-          <button className={s.button}>Sing in</button>
+          <div style={{ display: 'flex', flexDirection: 'row', padding: '5px' }}>
+            <HeaderMenu />
+            <button className={s.button}>Sing in</button>
+          </div>
         </Toolbar>
       </AppBar>
-      <div className={s.linkGroup}>
-        <Link to="/profile">profile</Link>
-        <Link to="/login">login</Link>
-        <Link to="/register">register</Link>
-        <Link to="/password-recovery">password recovery</Link>
-        <Link to="/password">password</Link>
-        <Link to="/test">test</Link>
-      </div>
     </div>
   )
 }
