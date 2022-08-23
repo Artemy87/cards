@@ -1,0 +1,8 @@
+.burgerLinks li {
+  align-items: center;
+  justify-content: center;
+}
+.burgerLinks a {
+  color: #366eff;
+  text-decoration: none;
+}

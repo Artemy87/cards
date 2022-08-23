@@ -3,6 +3,7 @@ import Button from '@mui/material/Button'
 import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
 import { Link } from 'react-router-dom'
+import s from './HeaderMenu.module.css'
 
 export function HeaderMenu() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
@@ -26,6 +27,7 @@ export function HeaderMenu() {
         Menu
       </Button>
       <Menu
+        className={s.burgerLinks}
         id="basic-menu"
         anchorEl={anchorEl}
         open={open}
