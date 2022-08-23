@@ -1,14 +1,16 @@
 import React from 'react'
+
 import './App.css'
-import { Header } from './main/header/Header'
 
 import { Route, Routes, Navigate } from 'react-router-dom'
+
 import Login from './f1-auth/a1-login/Login'
 import { Register } from './f1-auth/a2-register/Register'
 import Profile from './f1-auth/a3-Profile/Profile'
 import { Error404 } from './f1-auth/a4-404/Error404'
 import PasswordRecovery from './f1-auth/a5-password-recovery/PasswordRecovery'
 import Password from './f1-auth/a6-password/Password'
+import { Header } from './main/header/Header'
 
 function App() {
   return (

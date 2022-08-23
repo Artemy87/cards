@@ -1,11 +1,14 @@
-import { useFormik } from 'formik'
 import React from 'react'
+
 import Paper from '@mui/material/Paper/Paper'
+import { useFormik } from 'formik'
 import { NavLink } from 'react-router-dom'
+
 import style from './Register.module.css'
+
 import { createUser } from 'bll/reducers/authReducer'
-import { RegisterType } from 'dal/api/authAPI'
 import { useAppDispatch } from 'common/hooks/hook'
+import { RegisterType } from 'dal/api/auth-api'
 
 type FormikErrorType = {
   email?: string
@@ -22,7 +25,7 @@ export const Register = () => {
       confirmPassword: '',
     },
 
-    validate: (data) => {
+    validate: data => {
       const errors: FormikErrorType = {}
       const minLengthPassword = 8
 
@@ -50,6 +53,7 @@ export const Register = () => {
       dispatch(createUser({ email, password }))
     },
   })
+
   return (
     <Paper elevation={3} className={style.paper}>
       <h1>Sign Up</h1>

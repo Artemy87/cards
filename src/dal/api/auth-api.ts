@@ -18,6 +18,9 @@ export const authAPI = {
   logout() {
     return instance.delete<ResponseType<{ userId?: number }>>(`auth/login`)
   },
+  register(data: RegisterType) {
+    return instance.post<RegisterResponseType>('auth/register', data)
+  },
 }
 
 export type ResponseType<D = {}> = {
@@ -47,4 +50,27 @@ export type MeResponseType = {
   rememberMe: boolean
 
   error?: string
+}
+
+export type RegisterType = {
+  email: string
+  password: string
+}
+
+export type RegisterResponseType = {
+  addedUser: UserType
+  error?: string
+}
+
+export type UserType = {
+  created: string
+  email: string
+  isAdmin: boolean
+  name: string
+  publicCardPacksCount: number
+  rememberMe: boolean
+  updated: string
+  verified: boolean
+  __v: number
+  _id: string
 }
