@@ -1,14 +1,11 @@
-import React from 'react'
-
-import Paper from '@mui/material/Paper/Paper'
 import { useFormik } from 'formik'
-import { NavLink } from 'react-router-dom'
-
+import React from 'react'
+import Paper from '@mui/material/Paper/Paper'
+import { Navigate, NavLink } from 'react-router-dom'
 import style from './Register.module.css'
-
-import { createUser } from 'bll/reducers/authReducer'
-import { useAppDispatch } from 'common/hooks/hook'
-import { RegisterType } from 'dal/api/auth-api'
+import { changeLoggedIn, createUser } from 'bll/reducers/authReducer'
+import { RegisterType } from 'dal/api/authAPI'
+import { useAppDispatch, useAppSelector } from 'common/hooks/hook'
 
 type FormikErrorType = {
   email?: string
@@ -18,6 +15,7 @@ type FormikErrorType = {
 
 export const Register = () => {
   const dispatch = useAppDispatch()
+  const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn)
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -25,7 +23,7 @@ export const Register = () => {
       confirmPassword: '',
     },
 
-    validate: data => {
+    validate: (data) => {
       const errors: FormikErrorType = {}
       const minLengthPassword = 8
 
@@ -36,33 +34,42 @@ export const Register = () => {
       }
 
       if (!data.password) {
-        errors.password = 'Некорректный пороль'
+        errors.password = 'Введите пароль'
       } else if (data.password.length < minLengthPassword) {
-        errors.password = 'Некорректный пороль'
+        errors.password = 'Пароль должен содержать не менее 8 символов'
       }
 
       if (!data.confirmPassword) {
-        errors.confirmPassword = 'Некорректный пороль'
+        errors.confirmPassword = 'Введите пароль'
       } else if (data.confirmPassword.length < minLengthPassword) {
-        errors.confirmPassword = 'Некорректный пороль'
+        errors.confirmPassword = 'Пароль должен содержать не менее 8 символов'
+      }
+      if (data.password !== data.confirmPassword) {
+        errors.confirmPassword = 'Поля должны совпадать'
+        errors.password = 'Поля должны совпадать'
       }
 
       return errors
     },
     onSubmit: ({ email, password }: RegisterType) => {
       dispatch(createUser({ email, password }))
+      dispatch(changeLoggedIn({ isLoggedIn: true }))
     },
   })
-
+  if (isLoggedIn) return <Navigate to="/profile" />
   return (
     <Paper elevation={3} className={style.paper}>
       <h1>Sign Up</h1>
       <form onSubmit={formik.handleSubmit} className={style.form}>
         <input placeholder="Email" {...formik.getFieldProps('email')} />
         {formik.touched.email && formik.errors.email && <div>{formik.errors.email}</div>}
-        <input placeholder="Password" {...formik.getFieldProps('password')} />
+        <input type="password" placeholder="Password" {...formik.getFieldProps('password')} />
         {formik.touched.password && formik.errors.password && <div>{formik.errors.password}</div>}
-        <input placeholder="Confirm password" {...formik.getFieldProps('confirmPassword')} />
+        <input
+          type="password"
+          placeholder="Confirm password"
+          {...formik.getFieldProps('confirmPassword')}
+        />
         {formik.touched.confirmPassword && formik.errors.confirmPassword && (
           <div>{formik.errors.confirmPassword}</div>
         )}

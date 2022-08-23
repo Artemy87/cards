@@ -11,3 +11,6 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
+button:hover {
+  cursor: pointer;
+}
