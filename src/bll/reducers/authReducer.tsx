@@ -14,11 +14,36 @@ const slice = createSlice({
   name: 'auth',
   initialState: { isLoggedIn: false },
   reducers: {
-    changeLoggedIn: (state, action: PayloadAction<{ isLoggedIn: boolean }>) => {
+    setIsLoggedInAC: (state, action: PayloadAction<{ isLoggedIn: boolean }>) => {
       state.isLoggedIn = action.payload.isLoggedIn
     },
   },
 })
 
+//thunks
+export const loginTC = (data: any) => (dispatch) => {
+  authAPI
+    .login(data)
+    .then(res => {
+      if (res.data.resultCode === 0) {
+        dispatch(setIsLoggedInAC({isLoggedIn: true}))
+      } else {
+        console.log('error')
+      }
+    })
+    .catch(error => {
+      console.log(error)
+    })
+}
+
+export const loginTC = createAsyncThunk(
+    'login/user',
+    async (data: RegisterType, { dispatch }) => {
+      await authAPI.login(data)
+    }
+)
+
 export const authReducer = slice.reducer
-export const { changeLoggedIn } = slice.actions
+export const { setIsLoggedInAC } = slice.actions
+
+
