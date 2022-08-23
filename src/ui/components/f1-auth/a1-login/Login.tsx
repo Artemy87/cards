@@ -9,8 +9,8 @@ import TextField from '@mui/material/TextField'
 import { useFormik } from 'formik'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { loginTC } from '../../../../bll/reducers/authReducer'
-import { RootStateType } from '../../../../dal/store/store'
+import { loginTC } from 'bll/reducers/authReducer'
+import { RootStateType } from 'dal/store/store'
 
 type FormikErrorType = {
   email?: string
@@ -20,7 +20,7 @@ type FormikErrorType = {
 
 const Login = () => {
   const dispatch = useDispatch()
-  const isLoggedIn = useSelector<RootStateType, boolean>(state => state.auth.isLoggedIn)
+  const isLoggedIn = useSelector<RootStateType, boolean>((state) => state.auth.isLoggedIn)
 
   const formik = useFormik({
     initialValues: {
@@ -28,7 +28,7 @@ const Login = () => {
       password: '',
       rememberMe: false,
     },
-    validate: values => {
+    validate: (values) => {
       const errors: FormikErrorType = {}
 
       if (!values.email) {
@@ -45,7 +45,7 @@ const Login = () => {
 
       return errors
     },
-    onSubmit: values => {
+    onSubmit: (values) => {
       // @ts-ignore
       dispatch(loginTC(values))
       formik.resetForm()

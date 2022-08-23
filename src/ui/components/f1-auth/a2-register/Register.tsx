@@ -1,11 +1,14 @@
-import { useFormik } from 'formik'
 import React from 'react'
+
 import Paper from '@mui/material/Paper/Paper'
+import { useFormik } from 'formik'
 import { Navigate, NavLink } from 'react-router-dom'
+
 import style from './Register.module.css'
-import { changeLoggedIn, createUser } from 'bll/reducers/authReducer'
-import { RegisterType } from 'dal/api/authAPI'
+
+import { createUser, setIsLoggedInAC } from 'bll/reducers/authReducer'
 import { useAppDispatch, useAppSelector } from 'common/hooks/hook'
+import { RegisterType } from 'dal/api/auth-api'
 
 type FormikErrorType = {
   email?: string
@@ -53,10 +56,12 @@ export const Register = () => {
     },
     onSubmit: ({ email, password }: RegisterType) => {
       dispatch(createUser({ email, password }))
-      dispatch(changeLoggedIn({ isLoggedIn: true }))
+      dispatch(setIsLoggedInAC({ isLoggedIn: true }))
     },
   })
+
   if (isLoggedIn) return <Navigate to="/profile" />
+
   return (
     <Paper elevation={3} className={style.paper}>
       <h1>Sign Up</h1>
