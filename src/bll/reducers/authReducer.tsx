@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { authAPI, RegisterType } from 'dal/api/authAPI'
-import axios, { AxiosError } from 'axios'
 import { setAppError } from './appReducer'
 
 //THUNKS
