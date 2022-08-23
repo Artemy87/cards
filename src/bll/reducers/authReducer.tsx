@@ -1,23 +1,42 @@
-import { AppThunk } from '../../dal/store/store'
+import { Dispatch } from 'redux'
+import { authAPI } from '../../dal/api/auth-api'
 
-let initialState: InitialStateType = {}
+let initialState = {
+  isLoggedIn: false,
+}
 
 export const authReducer = (
   state: InitialStateType = initialState,
-  action: any
+  action: ActionsType
 ): InitialStateType => {
   switch (action.type) {
+    case 'login/SET-IS-LOGGED-IN':
+      return { ...state, isLoggedIn: action.value }
+    default:
+      return state
   }
-
-  return state
 }
 
-//thunk
-export const ThunkCreator = (): AppThunk => async (dispatch) => {
-  try {
-    //await
-  } catch (e) {}
+// actions
+export const setIsLoggedInAC = (value: boolean) =>
+  ({ type: 'login/SET-IS-LOGGED-IN', value } as const)
+
+//thunks
+export const loginTC = (data: any) => (dispatch: Dispatch) => {
+  authAPI
+    .login(data)
+    .then(res => {
+      if (res.data.resultCode === 0) {
+        dispatch(setIsLoggedInAC(true))
+      } else {
+        console.log('error')
+      }
+    })
+    .catch(error => {
+      console.log(error)
+    })
 }
 
 //type
-type InitialStateType = {}
+type InitialStateType = typeof initialState
+type ActionsType = ReturnType<typeof setIsLoggedInAC>
