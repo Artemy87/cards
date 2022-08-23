@@ -34,15 +34,15 @@ export const Register = () => {
       }
 
       if (!data.password) {
-        errors.password = 'Некорректный пороль'
+        errors.password = 'Введите пороль'
       } else if (data.password.length < minLengthPassword) {
-        errors.password = 'Некорректный пороль'
+        errors.password = 'Пороль должен содержать не менее 8 символов'
       }
 
       if (!data.confirmPassword) {
-        errors.confirmPassword = 'Некорректный пороль'
+        errors.confirmPassword = 'Введите пороль'
       } else if (data.confirmPassword.length < minLengthPassword) {
-        errors.confirmPassword = 'Некорректный пороль'
+        errors.confirmPassword = 'Пороль должен содержать не менее 8 символов'
       }
       if (data.password !== data.confirmPassword) {
         errors.confirmPassword = 'Поля должны совпадать'
