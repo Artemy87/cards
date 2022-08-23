@@ -1,11 +1,11 @@
 import { useFormik } from 'formik'
 import React from 'react'
-import { useDispatch } from 'react-redux'
 import Paper from '@mui/material/Paper/Paper'
 import { NavLink } from 'react-router-dom'
 import style from './Register.module.css'
 import { createUser } from 'bll/reducers/authReducer'
 import { RegisterType } from 'dal/api/authAPI'
+import { useAppDispatch } from 'common/hooks/hook'
 
 type FormikErrorType = {
   email?: string
@@ -14,7 +14,7 @@ type FormikErrorType = {
 }
 
 export const Register = () => {
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   const formik = useFormik({
     initialValues: {
       email: '',
