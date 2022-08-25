@@ -1,6 +1,10 @@
 import React from 'react'
 
+import Button from '@mui/material/Button'
+import FormControl from '@mui/material/FormControl'
+import FormGroup from '@mui/material/FormGroup'
 import Paper from '@mui/material/Paper/Paper'
+import TextField from '@mui/material/TextField'
 import { useFormik } from 'formik'
 import { Navigate, NavLink } from 'react-router-dom'
 
@@ -66,19 +70,29 @@ export const Register = () => {
     <Paper elevation={3} className={style.paper}>
       <h1>Sign Up</h1>
       <form onSubmit={formik.handleSubmit} className={style.form}>
-        <input placeholder="Email" {...formik.getFieldProps('email')} />
-        {formik.touched.email && formik.errors.email && <div>{formik.errors.email}</div>}
-        <input type="password" placeholder="Password" {...formik.getFieldProps('password')} />
-        {formik.touched.password && formik.errors.password && <div>{formik.errors.password}</div>}
-        <input
-          type="password"
-          placeholder="Confirm password"
-          {...formik.getFieldProps('confirmPassword')}
-        />
-        {formik.touched.confirmPassword && formik.errors.confirmPassword && (
-          <div>{formik.errors.confirmPassword}</div>
-        )}
-        <button type="submit">Sign Up</button>
+        <FormControl>
+          <FormGroup>
+            <TextField placeholder="Email" {...formik.getFieldProps('email')} />
+            {formik.touched.email && formik.errors.email && <div>{formik.errors.email}</div>}
+            <TextField
+              type="password"
+              placeholder="Password"
+              {...formik.getFieldProps('password')}
+            />
+            {formik.touched.password && formik.errors.password && (
+              <div>{formik.errors.password}</div>
+            )}
+            <TextField
+              type="password"
+              placeholder="Confirm password"
+              {...formik.getFieldProps('confirmPassword')}
+            />
+            {formik.touched.confirmPassword && formik.errors.confirmPassword && (
+              <div>{formik.errors.confirmPassword}</div>
+            )}
+            <Button type="submit">Sign Up</Button>
+          </FormGroup>
+        </FormControl>
       </form>
       <p>Already have an account?</p>
       <NavLink to={'/login'}>Sign In</NavLink>
