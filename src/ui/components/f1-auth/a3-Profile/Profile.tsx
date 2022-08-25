@@ -3,14 +3,14 @@ import React, { useEffect } from 'react'
 import { Button, Paper } from '@material-ui/core'
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace'
 
-import { getUserInfoTC } from '../../../../bll/reducers/userReducer'
-import { useAppDispatch, useAppSelector } from '../../../../common/hooks/hook'
-
 import LogOutImage from './buttonImages/LogOutImage'
 import PencilImage from './buttonImages/PencilImage'
 import avatar from './images/Ellipse 45.png'
 import addAvatar from './images/Group 61.png'
 import s from './Profile.module.css'
+
+import { getUserInfoTC } from 'bll/reducers/userReducer'
+import { useAppDispatch, useAppSelector } from 'common/hooks/hook'
 
 const Profile = () => {
   const dispatch = useAppDispatch()

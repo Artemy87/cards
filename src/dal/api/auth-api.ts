@@ -16,11 +16,16 @@ export const authAPI = {
     return instance.post<MeResponseType>(`auth/me`)
   },
   logout() {
-    return instance.delete<ResponseType<{ userId?: number }>>(`auth/login`)
+    return instance.delete<InfoResponseType>(`auth/me`)
   },
   register(data: RegisterType) {
     return instance.post<RegisterResponseType>('auth/register', data)
   },
+}
+
+export type InfoResponseType = {
+  info: string
+  error: string
 }
 
 export type ResponseType<D = {}> = {

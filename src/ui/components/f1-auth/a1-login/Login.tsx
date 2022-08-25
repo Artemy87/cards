@@ -7,10 +7,10 @@ import FormControlLabel from '@mui/material/FormControlLabel'
 import FormGroup from '@mui/material/FormGroup'
 import TextField from '@mui/material/TextField'
 import { useFormik } from 'formik'
-import { useDispatch, useSelector } from 'react-redux'
+import { Navigate } from 'react-router-dom'
 
 import { loginTC } from 'bll/reducers/authReducer'
-import { RootStateType } from 'dal/store/store'
+import { useAppDispatch, useAppSelector } from 'common/hooks/hook'
 
 type FormikErrorType = {
   email?: string
@@ -19,8 +19,8 @@ type FormikErrorType = {
 }
 
 const Login = () => {
-  const dispatch = useDispatch()
-  const isLoggedIn = useSelector<RootStateType, boolean>(state => state.auth.isLoggedIn)
+  const dispatch = useAppDispatch()
+  const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
 
   const formik = useFormik({
     initialValues: {
@@ -46,11 +46,12 @@ const Login = () => {
       return errors
     },
     onSubmit: values => {
-      // @ts-ignore
       dispatch(loginTC(values))
       formik.resetForm()
     },
   })
+
+  if (isLoggedIn) return <Navigate to="/profile" />
 
   return (
     <div>
