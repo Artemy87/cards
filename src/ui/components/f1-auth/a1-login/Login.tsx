@@ -20,7 +20,7 @@ type FormikErrorType = {
 
 const Login = () => {
   const dispatch = useDispatch()
-  const isLoggedIn = useSelector<RootStateType, boolean>((state) => state.auth.isLoggedIn)
+  const isLoggedIn = useSelector<RootStateType, boolean>(state => state.auth.isLoggedIn)
 
   const formik = useFormik({
     initialValues: {
@@ -28,7 +28,7 @@ const Login = () => {
       password: '',
       rememberMe: false,
     },
-    validate: (values) => {
+    validate: values => {
       const errors: FormikErrorType = {}
 
       if (!values.email) {
@@ -45,7 +45,7 @@ const Login = () => {
 
       return errors
     },
-    onSubmit: (values) => {
+    onSubmit: values => {
       // @ts-ignore
       dispatch(loginTC(values))
       formik.resetForm()

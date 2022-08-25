@@ -2,11 +2,9 @@ import { configureStore } from '@reduxjs/toolkit'
 import { combineReducers } from 'redux'
 import thunk, { ThunkAction, ThunkDispatch } from 'redux-thunk'
 
-// eslint-disable-next-line import/namespace
-import { userReducer } from '../../bll/reducers/userReducer'
-
 import { appReducer } from 'bll/reducers/appReducer'
 import { authReducer } from 'bll/reducers/authReducer'
+import { userReducer } from 'bll/reducers/userReducer'
 
 const rootReducer = combineReducers({
   auth: authReducer,

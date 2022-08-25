@@ -1,6 +1,6 @@
 import { createSlice, Dispatch, PayloadAction } from '@reduxjs/toolkit'
 
-import { authAPI, MeResponseType, UserType } from '../../dal/api/auth-api'
+import { authAPI, MeResponseType } from 'dal/api/auth-api'
 
 //Reducer
 const slice = createSlice({
@@ -11,20 +11,18 @@ const slice = createSlice({
       email: '',
       name: '',
       avatar: '',
-      publicCardPacksCount: 0, // количество колод
-
-      created: Date,
-      updated: Date,
+      publicCardPacksCount: 0,
+      created: '',
+      updated: '',
       isAdmin: false,
-      verified: false, // подтвердил ли почту
+      verified: false,
       rememberMe: false,
-
       error: '',
-    },
+    } as MeResponseType,
   },
   reducers: {
-    getUserInfoAC(state, action: PayloadAction<{ user: MeResponseType }>) {
-      state.user = action.payload.user
+    getUserInfoAC(state, action: PayloadAction<MeResponseType>) {
+      state.user = action.payload
     },
   },
 })

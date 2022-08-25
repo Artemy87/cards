@@ -18,7 +18,7 @@ type FormikErrorType = {
 
 export const Register = () => {
   const dispatch = useAppDispatch()
-  const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn)
+  const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -26,7 +26,7 @@ export const Register = () => {
       confirmPassword: '',
     },
 
-    validate: (data) => {
+    validate: data => {
       const errors: FormikErrorType = {}
       const minLengthPassword = 8
 
