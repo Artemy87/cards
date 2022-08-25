@@ -1,6 +1,8 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { authAPI, RegisterType } from 'dal/api/authAPI'
+
 import { setAppError } from './appReducer'
+
+import { authAPI, LoginParamsType, RegisterType } from 'dal/api/auth-api'
 
 //THUNKS
 export const createUser = createAsyncThunk(
@@ -10,6 +12,7 @@ export const createUser = createAsyncThunk(
       await authAPI.register({ ...data, email: data.email.toLowerCase() })
     } catch (error) {
       const err = error as string
+
       if (err.length) {
         dispatch(setAppError(err))
       }
@@ -22,11 +25,18 @@ const slice = createSlice({
   name: 'auth',
   initialState: { isLoggedIn: false },
   reducers: {
-    changeLoggedIn: (state, action: PayloadAction<{ isLoggedIn: boolean }>) => {
+    setIsLoggedInAC: (state, action: PayloadAction<{ isLoggedIn: boolean }>) => {
       state.isLoggedIn = action.payload.isLoggedIn
     },
   },
 })
 
+export const loginTC = createAsyncThunk(
+  'login/user',
+  async (data: LoginParamsType, { dispatch }) => {
+    await authAPI.login(data)
+  }
+)
+
 export const authReducer = slice.reducer
-export const { changeLoggedIn } = slice.actions
+export const { setIsLoggedInAC } = slice.actions
