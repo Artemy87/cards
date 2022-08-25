@@ -13,7 +13,7 @@ export const authAPI = {
     )
   },
   me() {
-    return instance.get<ResponseType<MeResponseType>>(`auth/me`)
+    return instance.post<MeResponseType>(`auth/me`)
   },
   logout() {
     return instance.delete<ResponseType<{ userId?: number }>>(`auth/login`)
@@ -43,8 +43,8 @@ export type MeResponseType = {
   avatar?: string
   publicCardPacksCount: number
 
-  created: Date
-  updated: Date
+  created: string
+  updated: string
   isAdmin: boolean
   verified: boolean
   rememberMe: boolean
