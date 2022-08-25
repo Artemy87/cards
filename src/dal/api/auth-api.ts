@@ -13,7 +13,7 @@ export const authAPI = {
     )
   },
   me() {
-    return instance.get<ResponseType<MeResponseType>>(`auth/me`)
+    return instance.post<ResponseType<MeResponseType>>(`auth/me`)
   },
   logout() {
     return instance.delete<ResponseType<{ userId?: number }>>(`auth/login`)
