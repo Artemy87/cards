@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 
 import { Button, Paper } from '@material-ui/core'
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace'
+import { Navigate } from 'react-router-dom'
 
 import LogOutImage from './buttonImages/LogOutImage'
 import PencilImage from './buttonImages/PencilImage'
@@ -14,13 +15,16 @@ import { useAppDispatch, useAppSelector } from 'common/hooks/hook'
 
 const Profile = () => {
   const dispatch = useAppDispatch()
-  const { name, email } = useAppSelector(state => state.userInfo.user)
-
-  console.log('Profile: ', name, email)
+  const user = useAppSelector(state => state.userInfo.user)
+  const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
 
   useEffect(() => {
     dispatch(getUserInfoTC())
   }, [])
+
+  // if (!isLoggedIn) {
+  //   return <Navigate to="/login" />
+  // }
 
   return (
     <div className={s.profileContainer}>
@@ -37,13 +41,13 @@ const Profile = () => {
           <img src={addAvatar} alt={'addAvatar'} className={s.addAvatar} />
         </div>
         <div className={s.nameGroup}>
-          <div className={s.name}>{name}</div>
+          <div className={s.name}>{user.name}</div>
           {/*<TextField id="standard-basic" label="Standard" variant="standard" />*/}
           <div className={s.pencilImage}>
             <PencilImage />
           </div>
         </div>
-        <div className={s.email}>{email}</div>
+        <div className={s.email}>{user.email}</div>
         <Button
           style={{ color: 'black', border: '1px solid grey', borderRadius: '20px', width: '126px' }}
           type={'submit'}
