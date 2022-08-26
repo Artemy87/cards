@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice, Dispatch, PayloadAction } from '@reduxjs/toolkit'
 
 import { setAppError } from './appReducer'
 
@@ -28,10 +28,15 @@ export const loginTC = createAsyncThunk(
   }
 )
 
-export const logoutTC = createAsyncThunk('logout/user', async ({}, { dispatch }) => {
-  await authAPI.logout()
-  dispatch(setIsLoggedInAC({ isLoggedIn: false }))
-})
+// export const logoutTC = createAsyncThunk('logout/user', async ({}, { dispatch }) => {
+//   await authAPI.logout()
+//   dispatch(setIsLoggedInAC({ isLoggedIn: false }))
+// })
+export const logoutTC = () => (dispatch: Dispatch) => {
+  authAPI.logout().then(() => {
+    dispatch(setIsLoggedInAC({ isLoggedIn: false }))
+  })
+}
 
 //Reducer
 const slice = createSlice({

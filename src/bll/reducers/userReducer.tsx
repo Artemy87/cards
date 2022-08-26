@@ -1,6 +1,5 @@
 import { createSlice, Dispatch, PayloadAction } from '@reduxjs/toolkit'
 
-import { setIsLoggedInAC } from 'bll/reducers/authReducer'
 import { authAPI, MeResponseType } from 'dal/api/auth-api'
 
 //THUNKS
@@ -9,12 +8,17 @@ export const getUserInfoTC = () => (dispatch: Dispatch) => {
     .me()
     .then(res => {
       dispatch(getUserInfoAC(res.data))
-      dispatch(setIsLoggedInAC({ isLoggedIn: true }))
     })
     .catch(e => {
       console.log(e)
     })
 }
+
+// export const getUserInfoTC = createAsyncThunk('profile/getUser', async ({}, { dispatch }) => {
+//   let res = await authAPI.me()
+//
+//   dispatch(getUserInfoAC(res.data))
+// })
 
 //Reducer
 const slice = createSlice({
