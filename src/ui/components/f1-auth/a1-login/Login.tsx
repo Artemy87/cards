@@ -1,14 +1,16 @@
 import React from 'react'
-import { useFormik } from 'formik'
-import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from '../../../../dal/store/store'
-import { loginTC } from '../../../../bll/reducers/authReducer'
+
+import Button from '@mui/material/Button'
 import Checkbox from '@mui/material/Checkbox'
 import FormControl from '@mui/material/FormControl'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import FormGroup from '@mui/material/FormGroup'
 import TextField from '@mui/material/TextField'
-import Button from '@mui/material/Button'
+import { useFormik } from 'formik'
+import { Navigate } from 'react-router-dom'
+
+import { loginTC } from 'bll/reducers/authReducer'
+import { useAppDispatch, useAppSelector } from 'common/hooks/hook'
 
 type FormikErrorType = {
   email?: string
@@ -17,8 +19,8 @@ type FormikErrorType = {
 }
 
 const Login = () => {
-  const dispatch = useDispatch()
-  const isLoggedIn = useSelector<RootState, boolean>(state => state.auth.isLoggedIn)
+  const dispatch = useAppDispatch()
+  const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
 
   const formik = useFormik({
     initialValues: {
@@ -28,6 +30,7 @@ const Login = () => {
     },
     validate: values => {
       const errors: FormikErrorType = {}
+
       if (!values.email) {
         errors.email = 'Required'
       } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
@@ -43,11 +46,12 @@ const Login = () => {
       return errors
     },
     onSubmit: values => {
-      // @ts-ignore
       dispatch(loginTC(values))
       formik.resetForm()
     },
   })
+
+  if (isLoggedIn) return <Navigate to="/profile" />
 
   return (
     <div>

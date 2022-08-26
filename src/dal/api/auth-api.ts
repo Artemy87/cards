@@ -13,11 +13,19 @@ export const authAPI = {
     )
   },
   me() {
-    return instance.get<ResponseType<MeResponseType>>(`auth/me`)
+    return instance.post<MeResponseType>(`auth/me`)
   },
   logout() {
-    return instance.delete<ResponseType<{ userId?: number }>>(`auth/login`)
+    return instance.delete<InfoResponseType>(`auth/me`)
   },
+  register(data: RegisterType) {
+    return instance.post<RegisterResponseType>('auth/register', data)
+  },
+}
+
+export type InfoResponseType = {
+  info: string
+  error: string
 }
 
 export type ResponseType<D = {}> = {
@@ -40,11 +48,34 @@ export type MeResponseType = {
   avatar?: string
   publicCardPacksCount: number
 
-  created: Date
-  updated: Date
+  created: string
+  updated: string
   isAdmin: boolean
   verified: boolean
   rememberMe: boolean
 
   error?: string
+}
+
+export type RegisterType = {
+  email: string
+  password: string
+}
+
+export type RegisterResponseType = {
+  addedUser: UserType
+  error?: string
+}
+
+export type UserType = {
+  created: string
+  email: string
+  isAdmin: boolean
+  name: string
+  publicCardPacksCount: number
+  rememberMe: boolean
+  updated: string
+  verified: boolean
+  __v: number
+  _id: string
 }

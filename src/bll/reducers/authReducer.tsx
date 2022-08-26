@@ -1,42 +1,42 @@
-import { Dispatch } from 'redux'
-import { authAPI } from '../../dal/api/auth-api'
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-let initialState = {
-  isLoggedIn: false,
-}
+import { setAppError } from './appReducer'
 
-export const authReducer = (
-  state: InitialStateType = initialState,
-  action: ActionsType
-): InitialStateType => {
-  switch (action.type) {
-    case 'login/SET-IS-LOGGED-IN':
-      return { ...state, isLoggedIn: action.value }
-    default:
-      return state
-  }
-}
+import { authAPI, LoginParamsType, RegisterType } from 'dal/api/auth-api'
 
-// actions
-export const setIsLoggedInAC = (value: boolean) =>
-  ({ type: 'login/SET-IS-LOGGED-IN', value } as const)
+//THUNKS
+export const createUser = createAsyncThunk(
+  'register/createUser',
+  async (data: RegisterType, { dispatch }) => {
+    try {
+      await authAPI.register({ ...data, email: data.email.toLowerCase() })
+    } catch (error) {
+      const err = error as string
 
-//thunks
-export const loginTC = (data: any) => (dispatch: Dispatch) => {
-  authAPI
-    .login(data)
-    .then(res => {
-      if (res.data.resultCode === 0) {
-        dispatch(setIsLoggedInAC(true))
-      } else {
-        console.log('error')
+      if (err.length) {
+        dispatch(setAppError(err))
       }
-    })
-    .catch(error => {
-      console.log(error)
-    })
-}
+    }
+  }
+)
 
-//type
-type InitialStateType = typeof initialState
-type ActionsType = ReturnType<typeof setIsLoggedInAC>
+//Reducer
+const slice = createSlice({
+  name: 'auth',
+  initialState: { isLoggedIn: false },
+  reducers: {
+    setIsLoggedInAC: (state, action: PayloadAction<{ isLoggedIn: boolean }>) => {
+      state.isLoggedIn = action.payload.isLoggedIn
+    },
+  },
+})
+
+export const loginTC = createAsyncThunk(
+  'login/user',
+  async (data: LoginParamsType, { dispatch }) => {
+    await authAPI.login(data)
+  }
+)
+
+export const authReducer = slice.reducer
+export const { setIsLoggedInAC } = slice.actions
