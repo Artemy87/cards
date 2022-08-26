@@ -10,6 +10,7 @@ import avatar from './images/Ellipse 45.png'
 import addAvatar from './images/Group 61.png'
 import s from './Profile.module.css'
 
+import { logoutTC } from 'bll/reducers/authReducer'
 import { getUserInfoTC } from 'bll/reducers/userReducer'
 import { useAppDispatch, useAppSelector } from 'common/hooks/hook'
 
@@ -22,9 +23,9 @@ const Profile = () => {
     dispatch(getUserInfoTC())
   }, [])
 
-  // if (!isLoggedIn) {
-  //   return <Navigate to="/login" />
-  // }
+  if (!isLoggedIn) {
+    return <Navigate to="/login" />
+  }
 
   return (
     <div className={s.profileContainer}>
@@ -49,13 +50,25 @@ const Profile = () => {
         </div>
         <div className={s.email}>{user.email}</div>
         <Button
-          style={{ color: 'black', border: '1px solid grey', borderRadius: '20px', width: '126px' }}
+          style={{
+            color: 'black',
+            border: '1px solid grey',
+            borderRadius: '20px',
+            width: '126px',
+          }}
           type={'submit'}
           variant={'text'}
           color={'primary'}
         >
           <LogOutImage />
-          <div className={s.logOut}>Log out</div>
+          <div
+            className={s.logOut}
+            onClick={() => {
+              dispatch(logoutTC())
+            }}
+          >
+            Log out
+          </div>
         </Button>
       </Paper>
     </div>

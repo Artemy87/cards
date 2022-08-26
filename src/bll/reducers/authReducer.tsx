@@ -20,6 +20,19 @@ export const createUser = createAsyncThunk(
   }
 )
 
+export const loginTC = createAsyncThunk(
+  'login/user',
+  async (data: LoginParamsType, { dispatch }) => {
+    await authAPI.login(data)
+    dispatch(setIsLoggedInAC({ isLoggedIn: true }))
+  }
+)
+
+export const logoutTC = createAsyncThunk('logout/user', async ({}, { dispatch }) => {
+  await authAPI.logout()
+  dispatch(setIsLoggedInAC({ isLoggedIn: false }))
+})
+
 //Reducer
 const slice = createSlice({
   name: 'auth',
@@ -30,13 +43,6 @@ const slice = createSlice({
     },
   },
 })
-
-export const loginTC = createAsyncThunk(
-  'login/user',
-  async (data: LoginParamsType, { dispatch }) => {
-    await authAPI.login(data)
-  }
-)
 
 export const authReducer = slice.reducer
 export const { setIsLoggedInAC } = slice.actions
