@@ -1,19 +1,24 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+
+import { AppBar, Toolbar } from '@mui/material'
+
 import s from './Header.module.css'
+import incubatorLogo from './img/Group 753.svg'
+
+import { HeaderMenu } from 'ui/components/main/header/HeaderMenu/HeaderMenu'
 
 export const Header = () => {
   return (
-    <div className={s.headerGroup}>
-      <h1>Header</h1>
-      <div className={s.linkGroup}>
-        <Link to="/profile">profile</Link>
-        <Link to="/login">login</Link>
-        <Link to="/register">register</Link>
-        <Link to="/password-recovery">password recovery</Link>
-        <Link to="/password">password</Link>
-        <Link to="/test">test</Link>
-      </div>
+    <div>
+      <AppBar position="static" color="default" className={s.headerBlock}>
+        <Toolbar className={s.toolBar}>
+          <img src={incubatorLogo} alt="" />
+          <div style={{ display: 'flex', flexDirection: 'row', padding: '5px' }}>
+            <HeaderMenu />
+            <button className={s.button}>Sing in</button>
+          </div>
+        </Toolbar>
+      </AppBar>
     </div>
   )
 }

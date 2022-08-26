@@ -1,11 +1,16 @@
 import React from 'react'
+
+// eslint-disable-next-line import/order
 import ReactDOM from 'react-dom/client'
+
 import './index.css'
-import App from './ui/components/App'
-import reportWebVitals from './reportWebVitals'
-import { HashRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
-import { store } from './dal/store/store'
+import { HashRouter } from 'react-router-dom'
+
+import reportWebVitals from './reportWebVitals'
+import App from './ui/components/App'
+
+import { store } from 'dal/store/store'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 

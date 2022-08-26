@@ -1,21 +1,30 @@
-import { applyMiddleware, combineReducers, legacy_createStore as createStore } from 'redux'
-import { authReducer } from '../../bll/reducers/authReducer'
+import { configureStore } from '@reduxjs/toolkit'
+import { combineReducers } from 'redux'
 import thunk, { ThunkAction, ThunkDispatch } from 'redux-thunk'
+
+import { appReducer } from 'bll/reducers/appReducer'
+import { authReducer } from 'bll/reducers/authReducer'
+import { userReducer } from 'bll/reducers/userReducer'
 
 const rootReducer = combineReducers({
   auth: authReducer,
+  app: appReducer,
+  userInfo: userReducer,
 })
 
-export const store = createStore(rootReducer, applyMiddleware(thunk))
+export const store = configureStore({
+  reducer: rootReducer,
+  middleware: getDefaultMiddleware => getDefaultMiddleware().prepend(thunk),
+})
 
 //type
 type AppActionsType = Parameters<typeof rootReducer>[1]
-export type RootState = ReturnType<typeof rootReducer>
+export type RootStateType = ReturnType<typeof rootReducer>
 
-export type AppDispatch = ThunkDispatch<RootState, unknown, AppActionsType>
+export type AppDispatch = ThunkDispatch<RootStateType, unknown, AppActionsType>
 export type AppThunk<ReturnType = void> = ThunkAction<
   ReturnType,
-  RootState,
+  RootStateType,
   unknown,
   AppActionsType
 >
