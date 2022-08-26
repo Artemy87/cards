@@ -3,22 +3,15 @@ import { createSlice, Dispatch, PayloadAction } from '@reduxjs/toolkit'
 import { authAPI, MeResponseType } from 'dal/api/auth-api'
 
 //THUNKS
-export const getUserInfoTC = () => (dispatch: Dispatch) => {
-  authAPI
-    .me()
-    .then(res => {
-      dispatch(getUserInfoAC(res.data))
-    })
-    .catch(e => {
-      console.log(e)
-    })
-}
+export const getUserInfoTC = () => async (dispatch: Dispatch) => {
+  try {
+    let res = await authAPI.me()
 
-// export const getUserInfoTC = createAsyncThunk('profile/getUser', async ({}, { dispatch }) => {
-//   let res = await authAPI.me()
-//
-//   dispatch(getUserInfoAC(res.data))
-// })
+    dispatch(getUserInfoAC(res.data))
+  } catch (e) {
+    console.log(e)
+  }
+}
 
 //Reducer
 const slice = createSlice({
@@ -47,3 +40,9 @@ const slice = createSlice({
 
 export const userReducer = slice.reducer
 export const { getUserInfoAC } = slice.actions
+
+// export const getUserInfoTC = createAsyncThunk('profile/getUser', async ({}, { dispatch }) => {
+//   let res = await authAPI.me()
+//
+//   dispatch(getUserInfoAC(res.data))
+// })

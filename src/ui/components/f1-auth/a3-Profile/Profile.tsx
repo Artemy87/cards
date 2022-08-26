@@ -23,6 +23,10 @@ const Profile = () => {
     dispatch(getUserInfoTC())
   }, [])
 
+  const logUotHandler = () => {
+    dispatch(logoutTC())
+  }
+
   if (!isLoggedIn) {
     return <Navigate to="/login" />
   }
@@ -61,12 +65,7 @@ const Profile = () => {
           color={'primary'}
         >
           <LogOutImage />
-          <div
-            className={s.logOut}
-            onClick={() => {
-              dispatch(logoutTC())
-            }}
-          >
+          <div className={s.logOut} onClick={logUotHandler}>
             Log out
           </div>
         </Button>
