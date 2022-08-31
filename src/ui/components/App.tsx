@@ -4,18 +4,18 @@ import './App.css'
 
 import { Navigate, Route, Routes } from 'react-router-dom'
 
-import Login from './f1-auth/a1-login/Login'
+import { Login } from './f1-auth/a1-login/Login'
 import { Register } from './f1-auth/a2-register/Register'
-import Profile from './f1-auth/a3-Profile/Profile'
+import { Profile } from './f1-auth/a3-Profile/Profile'
 import { Error404 } from './f1-auth/a4-404/Error404'
 import PasswordRecovery from './f1-auth/a5-password-recovery/PasswordRecovery'
 import Password from './f1-auth/a6-password/Password'
-import { Header } from './main/header/Header'
 
 import { initializeApp } from 'bll/reducers/appReducer'
 import { useAppDispatch } from 'common/hooks/hook'
+import { Header } from 'ui/components/header/Header'
 
-function App() {
+export function App() {
   const dispatch = useAppDispatch()
 
   useEffect(() => {
@@ -38,5 +38,3 @@ function App() {
     </div>
   )
 }
-
-export default App

@@ -13,7 +13,7 @@ import s from './Profile.module.css'
 import { logoutTC } from 'bll/reducers/authReducer'
 import { useAppDispatch, useAppSelector } from 'common/hooks/hook'
 
-const Profile = () => {
+export const Profile = () => {
   const dispatch = useAppDispatch()
   const user = useAppSelector(state => state.userInfo.user)
   const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
@@ -63,5 +63,3 @@ const Profile = () => {
     </div>
   )
 }
-
-export default Profile

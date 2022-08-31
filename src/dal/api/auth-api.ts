@@ -25,13 +25,6 @@ export type InfoResponseType = {
   error: string
 }
 
-export type ResponseType<D = {}> = {
-  resultCode: number
-  messages: Array<string>
-  fieldsErrors: Array<string>
-  data: D
-}
-
 export type LoginParamsType = {
   email: string
   password: string

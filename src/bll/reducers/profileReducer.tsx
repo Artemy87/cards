@@ -1,6 +1,6 @@
-import { createAsyncThunk, createSlice, Dispatch, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-import { authAPI, UserType } from 'dal/api/auth-api'
+import { UserType } from 'dal/api/auth-api'
 
 //THUNKS
 
