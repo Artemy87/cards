@@ -1,21 +1,19 @@
 import React from 'react'
 
-import { Button, Paper } from '@material-ui/core'
+import { Paper } from '@material-ui/core'
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace'
 import { Navigate } from 'react-router-dom'
 
 import avatar from './images/Ellipse 45.png'
 import addAvatar from './images/Group 61.png'
-import logout from './images/logout.svg'
 import pencil from './images/Pencil.svg'
 import s from './Profile.module.css'
 
-import { logoutTC } from 'bll/reducers/authReducer'
-import { useAppDispatch, useAppSelector } from 'common/hooks/hook'
+import { useAppSelector } from 'common/hooks/hook'
+import { ButtonLogout } from 'ui/components/common/button-logout/ButtonLogout'
 import style from 'ui/components/main/auth/auth.module.css'
 
 export const Profile = () => {
-  const dispatch = useAppDispatch()
   const user = useAppSelector(state => state.userInfo.user)
   const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
 
@@ -44,22 +42,7 @@ export const Profile = () => {
           </div>
         </div>
         <div className={s.email}>{user.email}</div>
-        <Button
-          onClick={() => dispatch(logoutTC())}
-          style={{
-            color: 'black',
-            border: '1px solid grey',
-            borderRadius: '20px',
-            width: '126px',
-            margin: '0 auto',
-          }}
-          type={'submit'}
-          variant={'text'}
-          color={'primary'}
-        >
-          <img src={logout} alt="" />
-          Log out
-        </Button>
+        <ButtonLogout />
       </Paper>
     </div>
   )
