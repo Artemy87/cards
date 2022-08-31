@@ -39,6 +39,9 @@ export function HeaderMenu() {
         }}
       >
         <MenuItem onClick={handleClose}>
+          <Link to="/packs">packs</Link>
+        </MenuItem>
+        <MenuItem onClick={handleClose}>
           <Link to="/profile">profile</Link>
         </MenuItem>
         <MenuItem onClick={handleClose}>

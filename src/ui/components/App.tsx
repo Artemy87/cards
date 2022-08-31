@@ -14,6 +14,7 @@ import { Header } from 'ui/components/header/Header'
 import { Error404 } from 'ui/components/main/auth/404/Error404'
 import PasswordRecovery from 'ui/components/main/auth/Password-recovery/PasswordRecovery'
 import Password from 'ui/components/main/auth/Password/Password'
+import { PacksList } from 'ui/components/main/packs-list/PacksList'
 
 export function App() {
   const dispatch = useAppDispatch()
@@ -26,7 +27,8 @@ export function App() {
     <div className="App">
       <Header />
       <Routes>
-        <Route path="/" element={<Navigate to={'/profile'} />} />
+        <Route path="/" element={<Navigate to={'/packs'} />} />
+        <Route path="packs" element={<PacksList />} />
         <Route path="profile" element={<Profile />} />
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
