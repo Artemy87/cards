@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import './App.css'
 
-import { Route, Routes, Navigate } from 'react-router-dom'
+import { Navigate, Route, Routes } from 'react-router-dom'
 
 import Login from './f1-auth/a1-login/Login'
 import { Register } from './f1-auth/a2-register/Register'
@@ -12,7 +12,16 @@ import PasswordRecovery from './f1-auth/a5-password-recovery/PasswordRecovery'
 import Password from './f1-auth/a6-password/Password'
 import { Header } from './main/header/Header'
 
+import { initializeApp } from 'bll/reducers/appReducer'
+import { useAppDispatch } from 'common/hooks/hook'
+
 function App() {
+  const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    dispatch(initializeApp())
+  }, [dispatch])
+
   return (
     <div className="App">
       <Header />

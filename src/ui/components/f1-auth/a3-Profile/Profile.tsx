@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 
 import { Button, Paper } from '@material-ui/core'
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace'
@@ -11,17 +11,12 @@ import addAvatar from './images/Group 61.png'
 import s from './Profile.module.css'
 
 import { logoutTC } from 'bll/reducers/authReducer'
-import { getUserInfoTC } from 'bll/reducers/userReducer'
 import { useAppDispatch, useAppSelector } from 'common/hooks/hook'
 
 const Profile = () => {
   const dispatch = useAppDispatch()
   const user = useAppSelector(state => state.userInfo.user)
   const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
-
-  useEffect(() => {
-    dispatch(getUserInfoTC())
-  }, [])
 
   if (!isLoggedIn) {
     return <Navigate to="/login" />
@@ -50,6 +45,7 @@ const Profile = () => {
         </div>
         <div className={s.email}>{user.email}</div>
         <Button
+          onClick={() => dispatch(logoutTC())}
           style={{
             color: 'black',
             border: '1px solid grey',
@@ -61,14 +57,7 @@ const Profile = () => {
           color={'primary'}
         >
           <LogOutImage />
-          <div
-            className={s.logOut}
-            onClick={() => {
-              dispatch(logoutTC())
-            }}
-          >
-            Log out
-          </div>
+          Log out
         </Button>
       </Paper>
     </div>
