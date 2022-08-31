@@ -8,21 +8,22 @@ import TextField from '@mui/material/TextField'
 import { useFormik } from 'formik'
 import { Navigate, NavLink } from 'react-router-dom'
 
-import style from './Register.module.css'
-
 import { createUser, setIsLoggedInAC } from 'bll/reducers/authReducer'
 import { useAppDispatch, useAppSelector } from 'common/hooks/hook'
 import { RegisterType } from 'dal/api/auth-api'
+import style from 'ui/components/main/auth/auth.module.css'
 
 type FormikErrorType = {
   email?: string
   password?: string
   confirmPassword?: string
 }
+export const minLengthPassword = 8
 
 export const Register = () => {
   const dispatch = useAppDispatch()
   const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
+
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -32,7 +33,6 @@ export const Register = () => {
 
     validate: data => {
       const errors: FormikErrorType = {}
-      const minLengthPassword = 8
 
       if (!data.email) {
         errors.email = 'Укажите e-mail'
@@ -43,13 +43,13 @@ export const Register = () => {
       if (!data.password) {
         errors.password = 'Введите пароль'
       } else if (data.password.length < minLengthPassword) {
-        errors.password = 'Пароль должен содержать не менее 8 символов'
+        errors.password = `Пароль должен содержать не менее ${minLengthPassword} символов`
       }
 
       if (!data.confirmPassword) {
         errors.confirmPassword = 'Введите пароль'
       } else if (data.confirmPassword.length < minLengthPassword) {
-        errors.confirmPassword = 'Пароль должен содержать не менее 8 символов'
+        errors.confirmPassword = `Пароль должен содержать не менее ${minLengthPassword} символов`
       }
       if (data.password !== data.confirmPassword) {
         errors.confirmPassword = 'Поля должны совпадать'
@@ -70,29 +70,33 @@ export const Register = () => {
     <Paper elevation={3} className={style.paper}>
       <h1>Sign Up</h1>
       <form onSubmit={formik.handleSubmit} className={style.form}>
-        <FormControl>
-          <FormGroup>
-            <TextField placeholder="Email" {...formik.getFieldProps('email')} />
-            {formik.touched.email && formik.errors.email && <div>{formik.errors.email}</div>}
-            <TextField
-              type="password"
-              placeholder="Password"
-              {...formik.getFieldProps('password')}
-            />
-            {formik.touched.password && formik.errors.password && (
-              <div>{formik.errors.password}</div>
-            )}
-            <TextField
-              type="password"
-              placeholder="Confirm password"
-              {...formik.getFieldProps('confirmPassword')}
-            />
-            {formik.touched.confirmPassword && formik.errors.confirmPassword && (
-              <div>{formik.errors.confirmPassword}</div>
-            )}
-            <Button type="submit">Sign Up</Button>
-          </FormGroup>
-        </FormControl>
+        <FormGroup>
+          <TextField label="Email" margin="normal" {...formik.getFieldProps('email')} />
+          {formik.touched.email && formik.errors.email && (
+            <div style={{ color: 'red' }}>{formik.errors.email}</div>
+          )}
+          <TextField
+            type="password"
+            label="Password"
+            margin="normal"
+            {...formik.getFieldProps('password')}
+          />
+          {formik.touched.password && formik.errors.password && (
+            <div style={{ color: 'red' }}>{formik.errors.password}</div>
+          )}
+          <TextField
+            type="password"
+            label="Confirm password"
+            margin="normal"
+            {...formik.getFieldProps('confirmPassword')}
+          />
+          {formik.touched.confirmPassword && formik.errors.confirmPassword && (
+            <div style={{ color: 'red' }}>{formik.errors.confirmPassword}</div>
+          )}
+          <button className={style.button} type="submit">
+            Sign Up
+          </button>
+        </FormGroup>
       </form>
       <p>Already have an account?</p>
       <NavLink to={'/login'}>Sign In</NavLink>

@@ -1,11 +1,6 @@
-.profileContainer {
-  display: flex;
-  flex-direction: column;
-}
-
 .backToPacksList {
   display: flex;
-  flex-direction: row;
+  justify-items: center;
 
   margin-top: 24px;
   margin-left: 168px;
@@ -14,7 +9,6 @@
 .arrow {
   width: 24px;
   height: 24px;
-  margin-top: 3px;
 }
 
 .text {

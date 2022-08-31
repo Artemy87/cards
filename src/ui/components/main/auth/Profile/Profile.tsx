@@ -4,14 +4,15 @@ import { Button, Paper } from '@material-ui/core'
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace'
 import { Navigate } from 'react-router-dom'
 
-import LogOutImage from './buttonImages/LogOutImage'
-import PencilImage from './buttonImages/PencilImage'
 import avatar from './images/Ellipse 45.png'
 import addAvatar from './images/Group 61.png'
+import logout from './images/logout.svg'
+import pencil from './images/Pencil.svg'
 import s from './Profile.module.css'
 
 import { logoutTC } from 'bll/reducers/authReducer'
 import { useAppDispatch, useAppSelector } from 'common/hooks/hook'
+import style from 'ui/components/main/auth/auth.module.css'
 
 export const Profile = () => {
   const dispatch = useAppDispatch()
@@ -30,7 +31,7 @@ export const Profile = () => {
         </div>
         <div className={s.text}>Back to packs List</div>
       </div>
-      <Paper elevation={3} className={s.personalInformationContainer}>
+      <Paper elevation={3} className={style.paper}>
         <div className={s.header}>Personal Information</div>
         <div className={s.imageGroup}>
           <img src={avatar} alt={'avatar'} />
@@ -38,9 +39,8 @@ export const Profile = () => {
         </div>
         <div className={s.nameGroup}>
           <div className={s.name}>{user.name}</div>
-          {/*<TextField id="standard-basic" label="Standard" variant="standard" />*/}
           <div className={s.pencilImage}>
-            <PencilImage />
+            <img src={pencil} alt="" />
           </div>
         </div>
         <div className={s.email}>{user.email}</div>
@@ -51,17 +51,16 @@ export const Profile = () => {
             border: '1px solid grey',
             borderRadius: '20px',
             width: '126px',
+            margin: '0 auto',
           }}
           type={'submit'}
           variant={'text'}
           color={'primary'}
         >
-          <LogOutImage />
+          <img src={logout} alt="" />
           Log out
         </Button>
       </Paper>
     </div>
   )
 }
-
-export default Profile
