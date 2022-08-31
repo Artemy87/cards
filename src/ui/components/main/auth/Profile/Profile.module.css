@@ -2,8 +2,12 @@
   display: flex;
   justify-items: center;
 
+  width: 180px;
   margin-top: 24px;
   margin-left: 168px;
+}
+.backToPacksList:hover {
+  cursor: pointer;
 }
 
 .arrow {

@@ -2,7 +2,7 @@ import React from 'react'
 
 import { Paper } from '@material-ui/core'
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace'
-import { Navigate } from 'react-router-dom'
+import { Navigate, useNavigate } from 'react-router-dom'
 
 import avatar from './images/Ellipse 45.png'
 import addAvatar from './images/Group 61.png'
@@ -14,6 +14,7 @@ import { ButtonLogout } from 'ui/components/common/button-logout/ButtonLogout'
 import style from 'ui/components/main/auth/auth.module.css'
 
 export const Profile = () => {
+  const navigate = useNavigate()
   const user = useAppSelector(state => state.userInfo.user)
   const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
 
@@ -23,11 +24,11 @@ export const Profile = () => {
 
   return (
     <div className={s.profileContainer}>
-      <div className={s.backToPacksList}>
+      <div className={s.backToPacksList} onClick={() => navigate('/packs')}>
         <div className={s.arrow}>
           <KeyboardBackspaceIcon fontSize={'medium'} />
         </div>
-        <div className={s.text}>Back to packs List</div>
+        <div className={s.text}>Back to Packs List</div>
       </div>
       <Paper elevation={3} className={style.paper}>
         <div className={s.header}>Personal Information</div>
