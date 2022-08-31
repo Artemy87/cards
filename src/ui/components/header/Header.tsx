@@ -2,10 +2,9 @@ import React from 'react'
 
 import { AppBar, Toolbar } from '@mui/material'
 
-import s from './Header.module.css'
-import incubatorLogo from './img/Group 753.svg'
-
-import { HeaderMenu } from 'ui/components/main/header/HeaderMenu/HeaderMenu'
+import s from 'ui/components/header/Header.module.css'
+import { HeaderMenu } from 'ui/components/header/HeaderMenu/HeaderMenu'
+import incubatorLogo from 'ui/components/header/img/Group 753.svg'
 
 export const Header = () => {
   return (

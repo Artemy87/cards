@@ -1,8 +1,9 @@
-import { createAsyncThunk, createSlice, Dispatch, PayloadAction } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 import { setAppError } from './appReducer'
 
-import { authAPI, LoginParamsType, RegisterType } from 'dal/api/auth-api'
+import { sendUserInfoAC } from 'bll/reducers/profileReducer'
+import { authAPI, LoginParamsType, RegisterType, UserType } from 'dal/api/auth-api'
 
 //THUNKS
 export const createUser = createAsyncThunk(
@@ -10,6 +11,7 @@ export const createUser = createAsyncThunk(
   async (data: RegisterType, { dispatch }) => {
     try {
       await authAPI.register({ ...data, email: data.email.toLowerCase() })
+      dispatch(loginTC({ ...data, rememberMe: false }))
     } catch (error) {
       const err = error as string
 
@@ -21,22 +23,21 @@ export const createUser = createAsyncThunk(
 )
 
 export const loginTC = createAsyncThunk(
-  'login/user',
+  'auth/login',
   async (data: LoginParamsType, { dispatch }) => {
-    await authAPI.login(data)
+    const res = await authAPI.login(data)
+
+    dispatch(sendUserInfoAC(res.data))
     dispatch(setIsLoggedInAC({ isLoggedIn: true }))
   }
 )
 
-// export const logoutTC = createAsyncThunk('logout/user', async ({}, { dispatch }) => {
-//   await authAPI.logout()
-//   dispatch(setIsLoggedInAC({ isLoggedIn: false }))
-// })
-export const logoutTC = () => (dispatch: Dispatch) => {
-  authAPI.logout().then(() => {
-    dispatch(setIsLoggedInAC({ isLoggedIn: false }))
-  })
-}
+export const logoutTC = createAsyncThunk('auth/logout', async (param, { dispatch }) => {
+  await authAPI.logout()
+
+  dispatch(sendUserInfoAC({} as UserType))
+  dispatch(setIsLoggedInAC({ isLoggedIn: false }))
+})
 
 //Reducer
 const slice = createSlice({

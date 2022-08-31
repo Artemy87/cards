@@ -18,7 +18,7 @@ type FormikErrorType = {
   rememberMe?: boolean
 }
 
-const Login = () => {
+export const Login = () => {
   const dispatch = useAppDispatch()
   const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
 
@@ -85,5 +85,3 @@ const Login = () => {
     </div>
   )
 }
-
-export default Login
