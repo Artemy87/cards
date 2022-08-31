@@ -35,6 +35,7 @@ export function App() {
         <Route path={'404'} element={<Error404 />} />
         <Route path="*" element={<Navigate to={'/404'} />} />
       </Routes>
+
     </div>
   )
 }
