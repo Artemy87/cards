@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 import { setIsLoggedInAC } from 'bll/reducers/authReducer'
 import { sendUserInfoAC } from 'bll/reducers/profileReducer'
-import { authAPI } from 'dal/api/auth-api'
+import { authApi } from 'dal/api/authApi'
 
 export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
 
@@ -10,7 +10,7 @@ export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
 export const initializeApp = createAsyncThunk('app/initializeApp', async (param, { dispatch }) => {
   try {
     dispatch(setAppStatus({ status: 'loading' }))
-    const res = await authAPI.me()
+    const res = await authApi.me()
 
     dispatch(sendUserInfoAC(res.data))
     dispatch(setIsLoggedInAC({ isLoggedIn: true }))
