@@ -9,9 +9,9 @@ import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 
-import { getPacksTC } from '../../../../bll/reducers/packsReducer'
-import { useAppDispatch } from '../../../../common/hooks/useAppDispatch'
-import { useAppSelector } from '../../../../common/hooks/useAppSelector'
+import { getPacksTC } from 'bll/reducers/packsReducer'
+import { useAppDispatch } from 'common/hooks/useAppDispatch'
+import { useAppSelector } from 'common/hooks/useAppSelector'
 
 export const TablePacks = () => {
   const dispatch = useAppDispatch()

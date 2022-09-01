@@ -11,19 +11,6 @@ export const packsAPI = {
     // const pageCount = `&pageCount=${4}`
     return instance.get<PacksResponseType>(`cards/pack`)
   },
-
-  // login(data: LoginParamsType) {
-  //   return instance.post<MeResponseType>(`auth/login`, data)
-  // },
-  // me() {
-  //   return instance.post<MeResponseType>(`auth/me`)
-  // },
-  // logout() {
-  //   return instance.delete<InfoResponseType>(`auth/me`)
-  // },
-  // register(data: RegisterType) {
-  //   return instance.post<RegisterResponseType>('auth/register', data)
-  // },
 }
 
 //types
