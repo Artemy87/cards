@@ -1,17 +1,18 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
-import { packsAPI, PacksResponseType } from '../../dal/api/packs-api'
+import { GetPacksResponseType } from '../../dal/api/apiResponseTypes'
+import { packsAPI } from '../../dal/api/packsApi'
 
 //THUNKS
 export const getPacksTC = createAsyncThunk('packs/getPacks', async (_, { dispatch }) => {
-  const res = await packsAPI.getPacks()
+  const res = await packsAPI.getPacks({})
 
   dispatch(getPacksAC(res.data.cardPacks))
 })
 
 const slice = createSlice({
   name: 'packs',
-  initialState: <PacksResponseType>{
+  initialState: <GetPacksResponseType>{
     cardPacks: [
       {
         cardsCount: null,

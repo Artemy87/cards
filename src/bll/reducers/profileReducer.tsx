@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-import { UserType } from 'dal/api/auth-api'
+import { UserType } from 'dal/api/apiDataTypes'
 
 //THUNKS
 
