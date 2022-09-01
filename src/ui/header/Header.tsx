@@ -3,11 +3,11 @@ import React from 'react'
 import { AppBar, Toolbar } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 
-import { useAppSelector } from 'common/hooks/hook'
-import { ButtonLogout } from 'ui/components/common/button-logout/ButtonLogout'
-import s from 'ui/components/header/Header.module.css'
-import { HeaderMenu } from 'ui/components/header/HeaderMenu/HeaderMenu'
-import incubatorLogo from 'ui/components/header/img/Group 753.svg'
+import { useAppSelector } from 'common/hooks/useAppSelector'
+import { ButtonLogout } from 'ui/common/button-logout/ButtonLogout'
+import s from 'ui/header/Header.module.css'
+import { HeaderMenu } from 'ui/header/HeaderMenu/HeaderMenu'
+import incubatorLogo from 'ui/header/img/Group 753.svg'
 
 export const Header = () => {
   const navigate = useNavigate()

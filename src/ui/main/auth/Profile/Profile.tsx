@@ -4,14 +4,13 @@ import { Paper } from '@material-ui/core'
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace'
 import { Navigate, useNavigate } from 'react-router-dom'
 
-import avatar from './images/Ellipse 45.png'
-import addAvatar from './images/Group 61.png'
-import pencil from './images/Pencil.svg'
-import s from './Profile.module.css'
-
-import { useAppSelector } from 'common/hooks/hook'
-import { ButtonLogout } from 'ui/components/common/button-logout/ButtonLogout'
-import style from 'ui/components/main/auth/auth.module.css'
+import { useAppSelector } from 'common/hooks/useAppSelector'
+import { ButtonLogout } from 'ui/common/button-logout/ButtonLogout'
+import style from 'ui/main/auth/auth.module.css'
+import avatar from 'ui/main/auth/Profile/images/Ellipse 45.png'
+import addAvatar from 'ui/main/auth/Profile/images/Group 61.png'
+import pencil from 'ui/main/auth/Profile/images/Pencil.svg'
+import s from 'ui/main/auth/Profile/Profile.module.css'
 
 export const Profile = () => {
   const navigate = useNavigate()

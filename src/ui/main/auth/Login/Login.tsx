@@ -1,8 +1,6 @@
 import React from 'react'
 
-import Button from '@mui/material/Button'
 import Checkbox from '@mui/material/Checkbox'
-import FormControl from '@mui/material/FormControl'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import FormGroup from '@mui/material/FormGroup'
 import Paper from '@mui/material/Paper/Paper'
@@ -10,11 +8,11 @@ import TextField from '@mui/material/TextField'
 import { useFormik } from 'formik'
 import { Link, Navigate } from 'react-router-dom'
 
-import { minLengthPassword } from '../Register/Register'
-
 import { loginTC } from 'bll/reducers/authReducer'
-import { useAppDispatch, useAppSelector } from 'common/hooks/hook'
-import style from 'ui/components/main/auth/auth.module.css'
+import { useAppDispatch } from 'common/hooks/useAppDispatch'
+import { useAppSelector } from 'common/hooks/useAppSelector'
+import style from 'ui/main/auth/auth.module.css'
+import { minLengthPassword } from 'ui/main/auth/Register/Register'
 
 type FormikErrorType = {
   email?: string
@@ -55,7 +53,7 @@ export const Login = () => {
     },
   })
 
-  if (isLoggedIn) return <Navigate to="/profile" />
+  if (isLoggedIn) return <Navigate to="/packs" />
 
   return (
     <Paper elevation={3} className={style.paper}>

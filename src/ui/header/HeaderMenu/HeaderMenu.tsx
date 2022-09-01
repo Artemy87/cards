@@ -5,7 +5,7 @@ import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
 import { Link } from 'react-router-dom'
 
-import s from 'ui/components/header/HeaderMenu/HeaderMenu.module.css'
+import s from 'ui/header/HeaderMenu/HeaderMenu.module.css'
 
 export function HeaderMenu() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)

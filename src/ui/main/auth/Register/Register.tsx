@@ -7,9 +7,10 @@ import { useFormik } from 'formik'
 import { Navigate, NavLink } from 'react-router-dom'
 
 import { createUser, setIsLoggedInAC } from 'bll/reducers/authReducer'
-import { useAppDispatch, useAppSelector } from 'common/hooks/hook'
+import { useAppDispatch } from 'common/hooks/useAppDispatch'
+import { useAppSelector } from 'common/hooks/useAppSelector'
 import { RegisterType } from 'dal/api/auth-api'
-import style from 'ui/components/main/auth/auth.module.css'
+import style from 'ui/main/auth/auth.module.css'
 
 type FormikErrorType = {
   email?: string

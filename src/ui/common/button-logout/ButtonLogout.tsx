@@ -1,9 +1,8 @@
 import Button from '@mui/material/Button'
 
-import logout from './img/logout.svg'
-
 import { logoutTC } from 'bll/reducers/authReducer'
-import { useAppDispatch } from 'common/hooks/hook'
+import { useAppDispatch } from 'common/hooks/useAppDispatch'
+import logout from 'ui/common/button-logout/img/logout.svg'
 
 export const ButtonLogout = () => {
   const dispatch = useAppDispatch()

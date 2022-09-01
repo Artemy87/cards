@@ -1,20 +1,19 @@
 import React, { useEffect } from 'react'
 
-import './App.css'
+import 'ui/App.css'
 
 import { Navigate, Route, Routes } from 'react-router-dom'
 
-import { Login } from './main/auth/Login/Login'
-import { Profile } from './main/auth/Profile/Profile'
-import { Register } from './main/auth/Register/Register'
-
 import { initializeApp } from 'bll/reducers/appReducer'
-import { useAppDispatch } from 'common/hooks/hook'
-import { Header } from 'ui/components/header/Header'
-import { Error404 } from 'ui/components/main/auth/404/Error404'
-import PasswordRecovery from 'ui/components/main/auth/Password-recovery/PasswordRecovery'
-import Password from 'ui/components/main/auth/Password/Password'
-import { PacksList } from 'ui/components/main/packs-list/PacksList'
+import { useAppDispatch } from 'common/hooks/useAppDispatch'
+import { Header } from 'ui/header/Header'
+import { Error404 } from 'ui/main/auth/404/Error404'
+import { Login } from 'ui/main/auth/Login/Login'
+import PasswordRecovery from 'ui/main/auth/Password-recovery/PasswordRecovery'
+import Password from 'ui/main/auth/Password/Password'
+import { Profile } from 'ui/main/auth/Profile/Profile'
+import { Register } from 'ui/main/auth/Register/Register'
+import { PacksList } from 'ui/main/packs-list/PacksList'
 
 export function App() {
   const dispatch = useAppDispatch()

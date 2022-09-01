@@ -10,8 +10,8 @@ import { HashRouter } from 'react-router-dom'
 
 import reportWebVitals from './reportWebVitals'
 
-import { store } from 'dal/store/store'
-import { App } from 'ui/components/App'
+import { store } from 'bll/store/store'
+import { App } from 'ui/App'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 
