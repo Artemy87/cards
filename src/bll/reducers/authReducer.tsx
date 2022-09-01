@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-import { LoginParamsType, RegisterType, UserType } from '../../dal/api/apiDataTypes'
+import { LoginParamsType, RegisterType } from '../../dal/api/apiDataTypes'
+import { UserType } from '../../dal/api/apiResponseTypes'
 
 import { setAppError } from './appReducer'
 

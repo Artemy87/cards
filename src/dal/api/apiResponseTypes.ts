@@ -68,3 +68,46 @@ export type DeletePackResponseType = {
 }
 
 //cards
+export type CardType = {
+  _id: string
+  __v: number
+  user_id: string
+  cardsPack_id: string
+  more_id: string
+  type: string
+  rating: number
+  question: string
+  answer: string
+  grade: number
+  shots: number
+  comments: string
+  created: string
+  updated: string
+}
+
+export type GetCardsResponseType = {
+  cards: Array<CardType>
+  cardsTotalCount: number
+  maxGrade: number
+  minGrade: number
+  page: number
+  pageCount: number
+  packUserId: string
+  packCreated: string
+  packDeckCover: string
+  packName: string
+  packPrivate: boolean
+  packUpdated: string
+}
+
+export type CreateCardResponseType = {
+  newCard: CardType
+}
+
+export type UpdateCardResponseType = {
+  updatedCard: CardType
+}
+
+export type DeleteCardResponseType = {
+  deletedCard: CardType
+}
