@@ -9,6 +9,7 @@ export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
 //THUNKS
 export const initializeApp = createAsyncThunk('app/initializeApp', async (param, { dispatch }) => {
   try {
+    dispatch(setAppStatus({ status: 'loading' }))
     const res = await authAPI.me()
 
     dispatch(sendUserInfoAC(res.data))
@@ -21,6 +22,8 @@ export const initializeApp = createAsyncThunk('app/initializeApp', async (param,
     if (err.length) {
       dispatch(setAppError(err))
     }
+  } finally {
+    dispatch(setAppStatus({ status: 'succeeded' }))
   }
 })
 
@@ -38,6 +41,11 @@ const slice = createSlice({
     setAppError(state, action: PayloadAction<string>) {
       state.error = action.payload
     },
+  },
+  extraReducers: builder => {
+    builder.addCase(initializeApp.fulfilled, state => {
+      state.isInitialized = true
+    })
   },
 })
 
