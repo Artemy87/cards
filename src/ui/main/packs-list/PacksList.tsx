@@ -16,7 +16,7 @@ export const PacksList = () => {
   return (
     <div>
       <div>
-        <div>Packs list</div>
+        <div>Packs List</div>
         <button>Add new pack</button>
       </div>
       <Search />
