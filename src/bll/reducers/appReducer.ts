@@ -1,6 +1,31 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
+
+import { setIsLoggedInAC } from 'bll/reducers/authReducer'
+import { sendUserInfoAC } from 'bll/reducers/profileReducer'
+import { authApi } from 'dal/api/authApi'
 
 export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
+
+//THUNKS
+export const initializeApp = createAsyncThunk('app/initializeApp', async (param, { dispatch }) => {
+  try {
+    dispatch(setAppStatus({ status: 'loading' }))
+    const res = await authApi.me()
+
+    dispatch(sendUserInfoAC(res.data))
+    dispatch(setIsLoggedInAC({ isLoggedIn: true }))
+
+    return res.data
+  } catch (error) {
+    const err = error as string
+
+    if (err.length) {
+      dispatch(setAppError(err))
+    }
+  } finally {
+    dispatch(setAppStatus({ status: 'succeeded' }))
+  }
+})
 
 const slice = createSlice({
   name: 'app',
@@ -16,6 +41,11 @@ const slice = createSlice({
     setAppError(state, action: PayloadAction<string>) {
       state.error = action.payload
     },
+  },
+  extraReducers: builder => {
+    builder.addCase(initializeApp.fulfilled, state => {
+      state.isInitialized = true
+    })
   },
 })
 
