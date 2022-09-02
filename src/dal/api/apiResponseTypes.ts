@@ -30,10 +30,10 @@ export type UserType = {
 //packs
 export type GetPacksResponseType = {
   cardPacks: Array<PackType>
-  cardPacksTotalCount: number | null // количество колод
+  cardPacksTotalCount: number | undefined // количество колод
   maxCardsCount: number | null
   minCardsCount: number | null
-  page: number | null // выбранная страница
+  page: number | undefined // выбранная страница
   pageCount: number | null // количество элементов на странице
 }
 

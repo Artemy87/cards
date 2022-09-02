@@ -4,11 +4,14 @@ import { GetPacksResponseType } from '../../dal/api/apiResponseTypes'
 import { packsAPI } from '../../dal/api/packsApi'
 
 //THUNKS
-export const getPacksTC = createAsyncThunk('packs/getPacks', async (_, { dispatch }) => {
-  const res = await packsAPI.getPacks({})
+export const getPacksTC = createAsyncThunk(
+  'packs/getPacks',
+  async (numberPage: number | undefined, { dispatch }) => {
+    const res = await packsAPI.getPacks({}, numberPage)
 
-  dispatch(getPacksAC(res.data.cardPacks))
-})
+    dispatch(getPacksAC(res.data))
+  }
+)
 
 const slice = createSlice({
   name: 'packs',
@@ -32,15 +35,17 @@ const slice = createSlice({
         _id: '',
       },
     ],
-    cardPacksTotalCount: null,
+    cardPacksTotalCount: undefined,
     maxCardsCount: null,
     minCardsCount: null,
-    page: null,
+    page: undefined,
     pageCount: null,
   },
   reducers: {
     getPacksAC(state, action) {
-      state.cardPacks = action.payload
+      state.cardPacks = action.payload.cardPacks
+      state.cardPacksTotalCount = action.payload.cardPacksTotalCount
+      state.page = action.payload.page
     },
   },
 })
