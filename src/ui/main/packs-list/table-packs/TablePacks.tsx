@@ -1,8 +1,8 @@
-import * as React from 'react'
-import { useEffect } from 'react'
+import React, { ChangeEvent, useEffect, useState } from 'react'
 
-import { Typography } from '@material-ui/core'
+import { Box, FormControl, InputLabel, Select, Typography } from '@material-ui/core'
 import { Pagination, Stack } from '@mui/material'
+import MenuItem from '@mui/material/MenuItem'
 import Paper from '@mui/material/Paper'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
@@ -11,11 +11,11 @@ import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 
-import { getPacksTC } from '../../../../bll/reducers/packsReducer'
-import { useAppDispatch } from '../../../../common/hooks/useAppDispatch'
-import { useAppSelector } from '../../../../common/hooks/useAppSelector'
-
 import s from './TablePacks.module.css'
+
+import { getPacksTC } from 'bll/reducers/packsReducer'
+import { useAppDispatch } from 'common/hooks/useAppDispatch'
+import { useAppSelector } from 'common/hooks/useAppSelector'
 
 export const TablePacks = () => {
   const dispatch = useAppDispatch()
@@ -23,17 +23,19 @@ export const TablePacks = () => {
   const totalCount = useAppSelector(state => state.packs.cardPacksTotalCount)
   const currentPage = useAppSelector(state => state.packs.page)
 
-  const [page, setPage] = React.useState(1)
-
-  console.log('TablePacks: ', currentPage)
+  const [numberPage, setNumberPage] = useState(1)
+  const [countPacks, setCountPacks] = useState(10)
 
   useEffect(() => {
-    dispatch(getPacksTC(undefined))
-  }, [])
+    dispatch(getPacksTC(numberPage, countPacks))
+  }, [countPacks])
+
+  const handleChange = (e: ChangeEvent<{ value: unknown }>) => {
+    setCountPacks(e.target.value as number)
+  }
 
   const onChangeNumberPage = (event: React.ChangeEvent<unknown>, num: number) => {
-    dispatch(getPacksTC(num))
-    setPage(num)
+    setNumberPage(num)
   }
 
   return (
@@ -67,14 +69,28 @@ export const TablePacks = () => {
       <div>
         <Stack direction={'row'} alignItems={'center'} spacing={2}>
           <Pagination
-            page={page}
+            page={countPacks}
             count={totalCount}
             boundaryCount={1}
             onChange={onChangeNumberPage}
           />
-          {/*<div>Show 100000</div>*/}
-          {/*<div>Cards per Page</div>*/}
-          <Typography>Page: {currentPage}</Typography>
+          <Typography>Show: {currentPage}</Typography>
+          <Box sx={{ minWidth: 120 }}>
+            <FormControl fullWidth>
+              {/*<InputLabel id="demo-simple-select-label">Age</InputLabel>*/}
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={countPacks}
+                label={countPacks}
+                onChange={handleChange}
+              >
+                <MenuItem value={10}>10</MenuItem>
+                <MenuItem value={15}>15</MenuItem>
+                <MenuItem value={20}>20</MenuItem>
+              </Select>
+            </FormControl>
+          </Box>
         </Stack>
       </div>
     </div>

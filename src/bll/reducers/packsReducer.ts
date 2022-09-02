@@ -6,8 +6,8 @@ import { packsAPI } from '../../dal/api/packsApi'
 //THUNKS
 export const getPacksTC = createAsyncThunk(
   'packs/getPacks',
-  async (numberPage: number | undefined, { dispatch }) => {
-    const res = await packsAPI.getPacks({}, numberPage)
+  async (numberPage: number | undefined, countPacks: number | undefined, { dispatch }) => {
+    const res = await packsAPI.getPacks({}, numberPage, countPacks)
 
     dispatch(getPacksAC(res.data))
   }

@@ -8,10 +8,13 @@ import {
 import { instance } from './instances'
 
 export const packsAPI = {
-  getPacks(data: GetPacksDataType, numberPage: number | undefined = 1) {
-    return instance.get<GetPacksResponseType>(`cards/pack?pageCount=${8}&page=${numberPage}`, {
-      data,
-    })
+  getPacks(data: GetPacksDataType, numberPage: number | undefined, countPacks: number | undefined) {
+    return instance.get<GetPacksResponseType>(
+      `cards/pack?pageCount=${countPacks}&page=${numberPage}`,
+      {
+        data,
+      }
+    )
   },
   createPack(data: CreatePackDataType) {
     return instance.post<CreatePackResponseType>(`cards/pack`, { cardsPack: data })
