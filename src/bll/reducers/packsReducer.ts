@@ -41,6 +41,8 @@ const slice = createSlice({
   reducers: {
     getPacksAC(state, action) {
       state.cardPacks = action.payload.cardPacks
+      state.cardPacksTotalCount = action.payload.cardPacksTotalCount
+      state.page = action.payload.page
     },
   },
 })
