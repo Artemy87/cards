@@ -2,7 +2,7 @@ import * as React from 'react'
 import { useEffect } from 'react'
 
 import { Typography } from '@material-ui/core'
-import { Pagination, PaginationItem, Stack } from '@mui/material'
+import { Pagination, Stack } from '@mui/material'
 import Paper from '@mui/material/Paper'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
@@ -23,6 +23,8 @@ export const TablePacks = () => {
   const totalCount = useAppSelector(state => state.packs.cardPacksTotalCount)
   const currentPage = useAppSelector(state => state.packs.page)
 
+  const [page, setPage] = React.useState(1)
+
   console.log('TablePacks: ', currentPage)
 
   useEffect(() => {
@@ -31,6 +33,7 @@ export const TablePacks = () => {
 
   const onChangeNumberPage = (event: React.ChangeEvent<unknown>, num: number) => {
     dispatch(getPacksTC(num))
+    setPage(num)
   }
 
   return (
@@ -64,7 +67,7 @@ export const TablePacks = () => {
       <div>
         <Stack direction={'row'} alignItems={'center'} spacing={2}>
           <Pagination
-            page={currentPage}
+            page={page}
             count={totalCount}
             boundaryCount={1}
             onChange={onChangeNumberPage}
