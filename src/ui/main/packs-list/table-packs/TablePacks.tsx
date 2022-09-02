@@ -24,15 +24,15 @@ export const TablePacks = () => {
   const currentPage = useAppSelector(state => state.packs.page)
 
   const [numberPage, setNumberPage] = useState(1)
-  // const [countPacks, setCountPacks] = useState(10)
+  const [countPacks, setCountPacks] = useState(10)
 
   useEffect(() => {
-    dispatch(getPacksTC({ page: numberPage }))
+    dispatch(getPacksTC({ page: numberPage, pageCount: countPacks }))
   }, [numberPage])
 
-  // const handleChange = (e: ChangeEvent<{ value: unknown }>) => {
-  //   setCountPacks(e.target.value as number)
-  // }
+  const handleChange = (e: ChangeEvent<{ value: unknown }>) => {
+    setCountPacks(e.target.value as number)
+  }
 
   const onChangeNumberPage = (event: React.ChangeEvent<unknown>, num: number) => {
     setNumberPage(num)
@@ -66,7 +66,7 @@ export const TablePacks = () => {
           </TableBody>
         </Table>
       </TableContainer>
-      <div>
+      <div className={s.paginationContainer}>
         <Stack direction={'row'} alignItems={'center'} spacing={2}>
           <Pagination
             page={numberPage}
@@ -74,16 +74,15 @@ export const TablePacks = () => {
             boundaryCount={1}
             onChange={onChangeNumberPage}
           />
-          <Typography>Show: {currentPage}</Typography>
+          <div className={s.show}>Show</div>
           <Box sx={{ minWidth: 120 }}>
             <FormControl fullWidth>
-              {/*<InputLabel id="demo-simple-select-label">Age</InputLabel>*/}
               <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
-                // value={countPacks}
-                // label={countPacks}
-                // onChange={handleChange}
+                value={countPacks}
+                label={countPacks}
+                onChange={handleChange}
               >
                 <MenuItem value={10}>10</MenuItem>
                 <MenuItem value={15}>15</MenuItem>
@@ -91,6 +90,7 @@ export const TablePacks = () => {
               </Select>
             </FormControl>
           </Box>
+          <div className={s.cardsPerPage}>Cards per Page</div>
         </Stack>
       </div>
     </div>
