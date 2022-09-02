@@ -18,10 +18,8 @@ export const TablePacks = () => {
   const cardPacks = useAppSelector(state => state.packs.cardPacks)
 
   useEffect(() => {
-    dispatch(getPacksTC())
+    dispatch(getPacksTC({}))
   }, [])
-
-  console.log('TablePacks: ', cardPacks)
 
   return (
     <>

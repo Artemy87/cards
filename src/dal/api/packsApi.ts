@@ -9,7 +9,7 @@ import { instance } from './instances'
 
 export const packsAPI = {
   getPacks(data: GetPacksDataType) {
-    return instance.get<GetPacksResponseType>(`cards/pack`, { data })
+    return instance.get<GetPacksResponseType>(`cards/pack`)
   },
   createPack(data: CreatePackDataType) {
     return instance.post<CreatePackResponseType>(`cards/pack`, { cardsPack: data })
