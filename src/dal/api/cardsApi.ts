@@ -1,4 +1,4 @@
-import { CreateCardDataType, GetCardsDataType, UpdateCardDataType } from './apiDataTypes'
+import { CreateCardDataType, GetCardsParamsType, UpdateCardDataType } from './apiDataTypes'
 import {
   CreateCardResponseType,
   DeleteCardResponseType,
@@ -8,8 +8,8 @@ import {
 import { instance } from './instances'
 
 export const cardsAPI = {
-  getCards(data: GetCardsDataType) {
-    return instance.get<GetCardsResponseType>('cards/card', { data })
+  getCards(params: GetCardsParamsType) {
+    return instance.get<GetCardsResponseType>('cards/card', { params })
   },
   createCard(data: CreateCardDataType) {
     return instance.post<CreateCardResponseType>(`cards/card`, { card: data })

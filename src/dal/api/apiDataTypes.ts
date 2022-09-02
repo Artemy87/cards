@@ -11,7 +11,7 @@ export type RegisterType = {
 }
 
 //cards
-export type GetPacksDataType = {
+export type GetPacksParamsType = {
   packName?: string
   min?: number
   max?: number
@@ -35,7 +35,7 @@ export type UpdatePackDataType = {
 }
 
 //cards
-export type GetCardsDataType = {
+export type GetCardsParamsType = {
   cardsPack_id: string
   cardAnswer?: string
   cardQuestion?: string

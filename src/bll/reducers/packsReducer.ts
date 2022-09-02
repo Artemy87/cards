@@ -32,10 +32,10 @@ const slice = createSlice({
         _id: '',
       },
     ],
-    cardPacksTotalCount: null,
+    cardPacksTotalCount: undefined,
     maxCardsCount: null,
     minCardsCount: null,
-    page: null,
+    page: undefined,
     pageCount: null,
   },
   reducers: {

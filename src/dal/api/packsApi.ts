@@ -1,4 +1,4 @@
-import { CreatePackDataType, GetPacksDataType, UpdatePackDataType } from './apiDataTypes'
+import { CreatePackDataType, GetPacksParamsType, UpdatePackDataType } from './apiDataTypes'
 import {
   CreatePackResponseType,
   DeletePackResponseType,
@@ -8,8 +8,8 @@ import {
 import { instance } from './instances'
 
 export const packsAPI = {
-  getPacks(data: GetPacksDataType) {
-    return instance.get<GetPacksResponseType>(`cards/pack`)
+  getPacks(params: GetPacksParamsType) {
+    return instance.get<GetPacksResponseType>(`cards/pack`, { params })
   },
   createPack(data: CreatePackDataType) {
     return instance.post<CreatePackResponseType>(`cards/pack`, { cardsPack: data })
