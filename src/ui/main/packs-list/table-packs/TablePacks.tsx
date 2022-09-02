@@ -28,7 +28,7 @@ export const TablePacks = () => {
 
   useEffect(() => {
     dispatch(getPacksTC({ page: numberPage, pageCount: countPacks }))
-  }, [numberPage])
+  }, [numberPage, countPacks])
 
   const handleChange = (e: ChangeEvent<{ value: unknown }>) => {
     setCountPacks(e.target.value as number)
