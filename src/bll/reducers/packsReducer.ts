@@ -7,7 +7,7 @@ import { packsAPI } from '../../dal/api/packsApi'
 export const getPacksTC = createAsyncThunk('packs/getPacks', async (data: any, { dispatch }) => {
   const res = await packsAPI.getPacks(data)
 
-  dispatch(getPacksAC(res.data.cardPacks))
+  dispatch(getPacksAC(res.data))
 })
 
 const slice = createSlice({
@@ -40,7 +40,7 @@ const slice = createSlice({
   },
   reducers: {
     getPacksAC(state, action) {
-      state.cardPacks = action.payload
+      state.cardPacks = action.payload.cardPacks
     },
   },
 })
