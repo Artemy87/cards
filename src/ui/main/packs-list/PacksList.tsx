@@ -21,7 +21,9 @@ export const PacksList = () => {
         <div>Packs List</div>
         <button className={style.button}>Add new pack</button>
       </div>
-      <Search />
+      <div className={style.navWrapper}>
+        <Search search="packName" />
+      </div>
       <TablePacks />
     </div>
   )

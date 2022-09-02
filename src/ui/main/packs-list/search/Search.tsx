@@ -1,14 +1,43 @@
-import React from 'react'
+import React, { ChangeEvent, useEffect, useState } from 'react'
 
 import { TextField } from '@material-ui/core'
+import { useSearchParams } from 'react-router-dom'
 
-import styles from './Search.module.css'
+import { useDebounce } from '../../../../common/hooks/useDebounce'
 
-export const Search = () => {
+type PropsType = {
+  search: 'packName'
+}
+
+export const Search: React.FC<PropsType> = ({ search }) => {
+  const [searchParams, setSearchParams] = useSearchParams()
+  const [value, setValue] = useState<string>(searchParams.get(search) || '')
+  const debouncedValue = useDebounce<string>(value)
+
+  const onChangeHandler = (e: ChangeEvent<HTMLInputElement>): void => {
+    setValue(e.target.value)
+  }
+
+  useEffect(() => {
+    const urlParams: { packName?: string } = {}
+
+    if (debouncedValue) {
+      urlParams[search] = debouncedValue
+    } else searchParams.delete(search)
+
+    setSearchParams({
+      ...Object.fromEntries(searchParams),
+      ...urlParams,
+    })
+  }, [debouncedValue, search, searchParams, setSearchParams])
+
   return (
-    <div>
-      {' '}
-      <TextField id="outlined-basic" label="Search" variant="outlined" />{' '}
-    </div>
+    <TextField
+      id="outlined-basic"
+      label="Search"
+      variant="outlined"
+      size="small"
+      onChange={onChangeHandler}
+    />
   )
 }
