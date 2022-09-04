@@ -1,0 +1,10 @@
+.tableHeadContainer {
+  background: #d7e5e1;
+}
+
+.tableRowContent .tableBodyName {
+  max-width: 550px;
+  height: 48px;
+
+  word-break: break-word;
+}

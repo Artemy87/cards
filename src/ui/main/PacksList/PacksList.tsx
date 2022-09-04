@@ -5,8 +5,8 @@ import { Navigate } from 'react-router-dom'
 import style from './PacksList.module.css'
 
 import { useAppSelector } from 'common/hooks/useAppSelector'
-import { Search } from 'ui/main/packs-list/search/Search'
-import { TablePacks } from 'ui/main/packs-list/table-packs/TablePacks'
+import { Search } from 'ui/main/PacksList/Search/Search'
+import { TablePacks } from 'ui/main/PacksList/TablePacks/TablePacks'
 
 export const PacksList = () => {
   const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)

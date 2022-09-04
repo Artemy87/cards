@@ -4,7 +4,7 @@ import { GetPacksResponseType } from '../../dal/api/apiResponseTypes'
 import { packsAPI } from '../../dal/api/packsApi'
 
 //THUNKS
-export const getPacksTC = createAsyncThunk('packs/getPacks', async (data: any, { dispatch }) => {
+export const getPacksTC = createAsyncThunk('getPacks', async (data: any, { dispatch }) => {
   const res = await packsAPI.getPacks(data)
 
   dispatch(getPacksAC(res.data))

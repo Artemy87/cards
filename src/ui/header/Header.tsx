@@ -7,7 +7,7 @@ import { useAppSelector } from 'common/hooks/useAppSelector'
 import { ButtonLogout } from 'ui/common/button-logout/ButtonLogout'
 import s from 'ui/header/Header.module.css'
 import { HeaderMenu } from 'ui/header/HeaderMenu/HeaderMenu'
-import incubatorLogo from 'ui/header/img/Group 753.svg'
+import incubatorLogo from 'ui/header/Image/Group 753.svg'
 
 export const Header = () => {
   const navigate = useNavigate()
