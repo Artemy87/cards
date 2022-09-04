@@ -7,6 +7,7 @@ import style from './PacksList.module.css'
 import { useAppSelector } from 'common/hooks/useAppSelector'
 import { Search } from 'ui/main/PacksList/Search/Search'
 import { TablePacks } from 'ui/main/PacksList/TablePacks/TablePacks'
+import { AddNewPackModal } from 'ui/modals/packModal/AddNewPackModal'
 
 export const PacksList = () => {
   const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
@@ -19,7 +20,7 @@ export const PacksList = () => {
     <div className={style.packsList}>
       <div className={style.packsListHeader}>
         <div>Packs List</div>
-        <button className={style.button}>Add new pack</button>
+        <AddNewPackModal />
       </div>
       <div className={style.navWrapper}>
         <Search search="packName" />

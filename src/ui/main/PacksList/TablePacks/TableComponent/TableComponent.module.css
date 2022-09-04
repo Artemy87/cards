@@ -3,8 +3,7 @@
 }
 
 .tableRowContent .tableBodyName {
-  max-width: 550px;
-  height: 48px;
+  width: 30%;
 
   word-break: break-word;
 }

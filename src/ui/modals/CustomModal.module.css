@@ -1,0 +1,48 @@
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.button {
+  width: 120px;
+  height: 36px;
+  margin: 0 auto;
+
+  color: white;
+
+  background: #366eff;
+  border: none;
+  border-radius: 30px;
+  box-shadow: 0 4px 18px rgba(54, 110, 255, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.buttonCancel {
+  width: 120px;
+  height: 36px;
+  margin: 0 auto;
+
+  color: white;
+
+  background: #366eff;
+  border: none;
+  border-radius: 30px;
+  box-shadow: 0 4px 18px rgba(54, 110, 255, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.buttonSave {
+  width: 120px;
+  height: 36px;
+  margin: 0 auto;
+
+  color: #366eff;
+
+  background: white;
+  border: none;
+  border-radius: 30px;
+  box-shadow: 0 4px 18px rgba(54, 110, 255, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
