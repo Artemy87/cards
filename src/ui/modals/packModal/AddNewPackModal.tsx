@@ -6,10 +6,10 @@ import FormGroup from '@mui/material/FormGroup'
 import TextField from '@mui/material/TextField'
 import { useFormik } from 'formik'
 
-import { setAddPack } from 'bll/reducers/modalsReducer'
 import { createPackTC } from 'bll/reducers/packsReducer'
 import { modal } from 'common/enum/modal'
 import { useAppDispatch } from 'common/hooks/useAppDispatch'
+import { useAppSelector } from 'common/hooks/useAppSelector'
 import { CustomModal } from 'ui/modals/CustomModal'
 import style from 'ui/modals/CustomModal.module.css'
 
@@ -20,8 +20,8 @@ type FormikErrorType = {
 
 export const AddNewPackModal = () => {
   const dispatch = useAppDispatch()
-  const handleClose = () => dispatch(setAddPack(false))
-
+  const page = useAppSelector(state => state.packs.page)
+  const pageCount = useAppSelector(state => state.packs.pageCount)
   const formik = useFormik({
     initialValues: {
       packName: '',
@@ -47,10 +47,9 @@ export const AddNewPackModal = () => {
             private: values.packPrivate,
             deckCover: values.deckCover,
           },
-          getPacksData: { page: 1, pageCount: 10 },
+          getPacksData: { page, pageCount },
         })
       )
-      handleClose()
     },
   })
 

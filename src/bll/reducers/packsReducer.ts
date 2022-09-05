@@ -23,11 +23,17 @@ export const createPackTC = createAsyncThunk(
   }
 )
 
-export const deletePackTC = createAsyncThunk('deletePack', async (id: string, { dispatch }) => {
-  const res = await packsAPI.deletePack(id)
+export const deletePackTC = createAsyncThunk(
+  'deletePack',
+  async (
+    params: { id: string; getPacksData: { page: number; pageCount: number } },
+    { dispatch }
+  ) => {
+    await packsAPI.deletePack(params.id)
 
-  dispatch(getPacksAC(res.data))
-})
+    dispatch(getPacksTC(params.getPacksData))
+  }
+)
 
 const slice = createSlice({
   name: 'packs',
@@ -63,8 +69,14 @@ const slice = createSlice({
       state.cardPacksTotalCount = action.payload.cardPacksTotalCount
       state.page = action.payload.page
     },
+    setPage(state, action) {
+      state.page = action.payload
+    },
+    setPageCount(state, action) {
+      state.pageCount = action.payload
+    },
   },
 })
 
 export const packsReducer = slice.reducer
-const { getPacksAC } = slice.actions
+export const { getPacksAC, setPage, setPageCount } = slice.actions

@@ -33,8 +33,8 @@ export type GetPacksResponseType = {
   cardPacksTotalCount: number | undefined // количество колод
   maxCardsCount: number | null
   minCardsCount: number | null
-  page: number | undefined // выбранная страница
-  pageCount: number | null // количество элементов на странице
+  page: number // выбранная страница
+  pageCount: number // количество элементов на странице
 }
 
 export type PackType = {

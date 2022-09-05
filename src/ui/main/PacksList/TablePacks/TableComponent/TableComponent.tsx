@@ -13,19 +13,12 @@ import teacher from '../Images/teacher.svg'
 
 import s from './/TableComponent.module.css'
 
-import { setDeletePack } from 'bll/reducers/modalsReducer'
-import { useAppDispatch } from 'common/hooks/useAppDispatch'
 import { useAppSelector } from 'common/hooks/useAppSelector'
 import { DeletePackModal } from 'ui/modals/packModal/DeletePackModal'
 
 export const TableComponent = () => {
-  const dispatch = useAppDispatch()
   const cardPacks = useAppSelector(state => state.packs.cardPacks)
   const myId = useAppSelector(state => state.userInfo.user._id)
-
-  const openDeleteModal = () => {
-    dispatch(setDeletePack(true))
-  }
 
   return (
     <TableContainer component={Paper}>

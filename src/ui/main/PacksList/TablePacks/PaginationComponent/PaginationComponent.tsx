@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useState } from 'react'
+import React, { ChangeEvent } from 'react'
 
 import { Box, FormControl, Select } from '@material-ui/core'
 import { Pagination, Stack } from '@mui/material'
@@ -6,35 +6,30 @@ import MenuItem from '@mui/material/MenuItem'
 
 import s from './/PaginationComponent.module.css'
 
-import { getPacksTC } from 'bll/reducers/packsReducer'
+import { getPacksAC, getPacksTC, setPage, setPageCount } from 'bll/reducers/packsReducer'
 import { useAppDispatch } from 'common/hooks/useAppDispatch'
 import { useAppSelector } from 'common/hooks/useAppSelector'
 
 export const PaginationComponent = () => {
   const dispatch = useAppDispatch()
+  const page = useAppSelector(state => state.packs.page)
+  const pageCount = useAppSelector(state => state.packs.pageCount)
 
   const totalCount = useAppSelector(state => state.packs.cardPacksTotalCount)
 
-  const [numberPage, setNumberPage] = useState(1)
-  const [countPacks, setCountPacks] = useState(10)
-
-  useEffect(() => {
-    dispatch(getPacksTC({ page: numberPage, pageCount: countPacks }))
-  }, [numberPage, countPacks])
-
-  const handleChange = (e: ChangeEvent<{ value: unknown }>) => {
-    setCountPacks(e.target.value as number)
+  const onChangeNumberPage = (event: React.ChangeEvent<unknown>, num: number) => {
+    dispatch(setPage(num))
   }
 
-  const onChangeNumberPage = (event: React.ChangeEvent<unknown>, num: number) => {
-    setNumberPage(num)
+  const handleChange = (e: ChangeEvent<{ value: unknown }>) => {
+    dispatch(setPageCount(e.target.value as number))
   }
 
   return (
     <div className={s.paginationContainer}>
       <Stack direction={'row'} alignItems={'center'} spacing={2}>
         <Pagination
-          page={numberPage}
+          page={page}
           count={totalCount}
           boundaryCount={1}
           onChange={onChangeNumberPage}
@@ -45,8 +40,8 @@ export const PaginationComponent = () => {
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"
-              value={countPacks}
-              label={countPacks}
+              value={pageCount}
+              label={pageCount}
               onChange={handleChange}
             >
               <MenuItem value={10}>10</MenuItem>

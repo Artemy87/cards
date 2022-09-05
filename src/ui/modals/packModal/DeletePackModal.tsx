@@ -1,9 +1,9 @@
 import React from 'react'
 
-import { setDeletePack } from 'bll/reducers/modalsReducer'
 import { deletePackTC } from 'bll/reducers/packsReducer'
 import { modal } from 'common/enum/modal'
 import { useAppDispatch } from 'common/hooks/useAppDispatch'
+import { useAppSelector } from 'common/hooks/useAppSelector'
 import { CustomModal } from 'ui/modals/CustomModal'
 import style from 'ui/modals/CustomModal.module.css'
 
@@ -14,9 +14,16 @@ type DeletePackModalType = {
 
 export const DeletePackModal: React.FC<DeletePackModalType> = ({ packName, packId }) => {
   const dispatch = useAppDispatch()
+  const page = useAppSelector(state => state.packs.page)
+  const pageCount = useAppSelector(state => state.packs.pageCount)
 
   const deletePack = () => {
-    dispatch(deletePackTC(packId))
+    dispatch(
+      deletePackTC({
+        id: packId,
+        getPacksData: { page, pageCount },
+      })
+    )
   }
 
   return (
