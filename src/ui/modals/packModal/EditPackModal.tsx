@@ -6,9 +6,10 @@ import FormGroup from '@mui/material/FormGroup'
 import TextField from '@mui/material/TextField'
 import { useFormik } from 'formik'
 
+import { modal } from 'common/enum/modal'
 import { useAppDispatch } from 'common/hooks/useAppDispatch'
-import style from 'ui/main/auth/auth.module.css'
 import { CustomModal } from 'ui/modals/CustomModal'
+import style from 'ui/modals/CustomModal.module.css'
 
 type FormikErrorType = {
   namePack?: string
@@ -40,7 +41,7 @@ export const EditPackModal = () => {
   })
 
   return (
-    <CustomModal modalName={'Edit pack'}>
+    <CustomModal modalName={modal.EDIT_PACK}>
       <form onSubmit={formik.handleSubmit}>
         <FormGroup>
           <TextField label="Name pack" margin="normal" {...formik.getFieldProps('namePack')} />
@@ -51,10 +52,12 @@ export const EditPackModal = () => {
             label={'Private pack'}
             control={<Checkbox {...formik.getFieldProps('privatePack ')} />}
           />
-          <button className={style.buttonCancel}>Cancel</button>
-          <button className={style.button} type={'submit'} color={'primary'}>
-            Save
-          </button>
+          <div className={style.buttons}>
+            <button className={style.buttonCancel}>Cancel</button>
+            <button className={style.buttonSave} type={'submit'} color={'primary'}>
+              Save
+            </button>
+          </div>
         </FormGroup>
       </form>
     </CustomModal>

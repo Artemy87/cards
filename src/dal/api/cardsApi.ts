@@ -1,11 +1,16 @@
-import { CreateCardDataType, GetCardsParamsType, UpdateCardDataType } from './apiDataTypes'
+import { instance } from './instances'
+
+import {
+  CreateCardDataType,
+  GetCardsParamsType,
+  UpdateCardDataType,
+} from 'dal/api/Types/apiDataTypes'
 import {
   CreateCardResponseType,
   DeleteCardResponseType,
   GetCardsResponseType,
   UpdateCardResponseType,
-} from './apiResponseTypes'
-import { instance } from './instances'
+} from 'dal/api/Types/apiResponseTypes'
 
 export const cardsAPI = {
   getCards(params: GetCardsParamsType) {

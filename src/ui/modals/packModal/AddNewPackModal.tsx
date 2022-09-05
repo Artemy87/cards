@@ -6,50 +6,71 @@ import FormGroup from '@mui/material/FormGroup'
 import TextField from '@mui/material/TextField'
 import { useFormik } from 'formik'
 
+import { setAddPack } from 'bll/reducers/modalsReducer'
+import { createPackTC } from 'bll/reducers/packsReducer'
+import { modal } from 'common/enum/modal'
 import { useAppDispatch } from 'common/hooks/useAppDispatch'
 import { CustomModal } from 'ui/modals/CustomModal'
+import style from 'ui/modals/CustomModal.module.css'
 
 type FormikErrorType = {
-  namePack?: string
-  privatePack?: boolean
+  packName?: string
+  packPrivate?: boolean
 }
 
 export const AddNewPackModal = () => {
   const dispatch = useAppDispatch()
+  const handleClose = () => dispatch(setAddPack(false))
+
   const formik = useFormik({
     initialValues: {
-      namePack: '',
-      privatePack: false,
+      packName: '',
+      packPrivate: false,
+      deckCover: '',
     },
     validate: values => {
       const errors: FormikErrorType = {}
 
-      if (!values.namePack) {
-        errors.namePack = 'Required'
-      } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.namePack)) {
-        errors.namePack = 'Invalid email address'
+      if (!values.packName) {
+        errors.packName = 'Required'
+      } else if (values.packName.length < 1) {
+        errors.packName = 'Invalid email address'
       }
 
       return errors
     },
     onSubmit: values => {
-      // dispatch(loginTC(values))
-      formik.resetForm()
+      dispatch(
+        createPackTC({
+          data: {
+            name: values.packName,
+            private: values.packPrivate,
+            deckCover: values.deckCover,
+          },
+          getPacksData: { page: 1, pageCount: 10 },
+        })
+      )
+      handleClose()
     },
   })
 
   return (
-    <CustomModal modalName={'Add new pack'}>
+    <CustomModal modalName={modal.ADD_PACK}>
       <form onSubmit={formik.handleSubmit}>
         <FormGroup>
-          <TextField label="Name pack" margin="normal" {...formik.getFieldProps('namePack')} />
-          {formik.touched.namePack && formik.errors.namePack && (
-            <div style={{ color: 'red' }}>{formik.errors.namePack} </div>
+          <TextField label="Name pack" margin="normal" {...formik.getFieldProps('packName')} />
+          {formik.touched.packName && formik.errors.packName && (
+            <div style={{ color: 'red' }}>{formik.errors.packName} </div>
           )}
           <FormControlLabel
             label={'Private pack'}
             control={<Checkbox {...formik.getFieldProps('privatePack ')} />}
           />
+          <div className={style.buttons}>
+            <button className={style.buttonSave} type={'submit'}>
+              Save
+            </button>
+          </div>
         </FormGroup>
       </form>
     </CustomModal>

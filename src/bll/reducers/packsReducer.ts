@@ -1,7 +1,8 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
-import { GetPacksResponseType } from '../../dal/api/apiResponseTypes'
-import { packsAPI } from '../../dal/api/packsApi'
+import { packsAPI } from 'dal/api/packsApi'
+import { CreatePackDataType } from 'dal/api/Types/apiDataTypes'
+import { GetPacksResponseType } from 'dal/api/Types/apiResponseTypes'
 
 //THUNKS
 export const getPacksTC = createAsyncThunk('getPacks', async (data: any, { dispatch }) => {
@@ -10,34 +11,52 @@ export const getPacksTC = createAsyncThunk('getPacks', async (data: any, { dispa
   dispatch(getPacksAC(res.data))
 })
 
+export const createPackTC = createAsyncThunk(
+  'createPack',
+  async (
+    params: { data: CreatePackDataType; getPacksData: { page: number; pageCount: number } },
+    { dispatch }
+  ) => {
+    await packsAPI.createPack(params.data)
+
+    dispatch(getPacksTC(params.getPacksData))
+  }
+)
+
+export const deletePackTC = createAsyncThunk('deletePack', async (id: string, { dispatch }) => {
+  const res = await packsAPI.deletePack(id)
+
+  dispatch(getPacksAC(res.data))
+})
+
 const slice = createSlice({
   name: 'packs',
-  initialState: <GetPacksResponseType>{
+  initialState: {
     cardPacks: [
       {
-        cardsCount: null,
+        cardsCount: 0,
         created: '',
-        grade: null,
+        grade: 0,
         more_id: '',
         name: '',
         path: '',
         private: false,
-        rating: null,
-        shots: null,
+        rating: 0,
+        shots: 0,
         type: '',
         updated: '',
         user_id: '',
         user_name: '',
-        __v: null,
+        __v: 0,
         _id: '',
       },
     ],
-    cardPacksTotalCount: undefined,
-    maxCardsCount: null,
-    minCardsCount: null,
-    page: undefined,
-    pageCount: null,
-  },
+    cardPacksTotalCount: 0,
+    maxCardsCount: 0,
+    minCardsCount: 0,
+    page: 1,
+    pageCount: 10,
+  } as GetPacksResponseType,
   reducers: {
     getPacksAC(state, action) {
       state.cardPacks = action.payload.cardPacks

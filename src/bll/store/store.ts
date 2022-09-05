@@ -6,6 +6,7 @@ import { packsReducer } from '../reducers/packsReducer'
 
 import { appReducer } from 'bll/reducers/appReducer'
 import { authReducer } from 'bll/reducers/authReducer'
+import { modalsReducer } from 'bll/reducers/modalsReducer'
 import { profileReducer } from 'bll/reducers/profileReducer'
 
 export const rootReducer = combineReducers({
@@ -13,6 +14,7 @@ export const rootReducer = combineReducers({
   app: appReducer,
   userInfo: profileReducer,
   packs: packsReducer,
+  modals: modalsReducer,
 })
 
 export const store = configureStore({

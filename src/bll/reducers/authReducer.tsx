@@ -1,12 +1,11 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-import { LoginParamsType, RegisterType } from '../../dal/api/apiDataTypes'
-import { UserType } from '../../dal/api/apiResponseTypes'
-
 import { setAppError } from './appReducer'
 
 import { sendUserInfoAC } from 'bll/reducers/profileReducer'
 import { authApi } from 'dal/api/authApi'
+import { LoginParamsType, RegisterType } from 'dal/api/Types/apiDataTypes'
+import { UserType } from 'dal/api/Types/apiResponseTypes'
 
 //THUNKS
 export const createUser = createAsyncThunk(

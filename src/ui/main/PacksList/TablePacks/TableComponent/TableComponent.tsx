@@ -13,10 +13,19 @@ import teacher from '../Images/teacher.svg'
 
 import s from './/TableComponent.module.css'
 
+import { setDeletePack } from 'bll/reducers/modalsReducer'
+import { useAppDispatch } from 'common/hooks/useAppDispatch'
 import { useAppSelector } from 'common/hooks/useAppSelector'
+import { DeletePackModal } from 'ui/modals/packModal/DeletePackModal'
 
 export const TableComponent = () => {
+  const dispatch = useAppDispatch()
   const cardPacks = useAppSelector(state => state.packs.cardPacks)
+  const myId = useAppSelector(state => state.userInfo.user._id)
+
+  const openDeleteModal = () => {
+    dispatch(setDeletePack(true))
+  }
 
   return (
     <TableContainer component={Paper}>
@@ -33,6 +42,7 @@ export const TableComponent = () => {
         <TableBody>
           {cardPacks.map(d => {
             const convertedDate = dayjs(d.created).format('D MMM YYYY')
+            const userId = d.user_id
 
             return (
               <TableRow
@@ -48,6 +58,13 @@ export const TableComponent = () => {
                 <TableCell style={{ width: '140px' }}>{d.user_name}</TableCell>
                 <TableCell>
                   <img src={teacher} alt="teacher icon" />
+                  {myId === userId ? (
+                    <div>
+                      <DeletePackModal packName={d.name} packId={d._id} />
+                    </div>
+                  ) : (
+                    <div></div>
+                  )}
                 </TableCell>
               </TableRow>
             )

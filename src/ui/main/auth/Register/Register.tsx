@@ -9,7 +9,7 @@ import { Navigate, NavLink } from 'react-router-dom'
 import { createUser, setIsLoggedInAC } from 'bll/reducers/authReducer'
 import { useAppDispatch } from 'common/hooks/useAppDispatch'
 import { useAppSelector } from 'common/hooks/useAppSelector'
-import { RegisterType } from 'dal/api/apiDataTypes'
+import { RegisterType } from 'dal/api/Types/apiDataTypes'
 import style from 'ui/main/auth/auth.module.css'
 
 type FormikErrorType = {

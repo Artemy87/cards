@@ -10,6 +10,17 @@ export type RegisterType = {
   password: string
 }
 
+//packs
+export type PacksParamsType = {
+  packName?: string
+  min?: number
+  max?: number
+  sortPacks?: string
+  page?: number
+  pageCount?: number
+  user_id?: string
+}
+
 //cards
 export type GetPacksParamsType = {
   packName?: string

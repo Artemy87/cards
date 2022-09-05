@@ -1,11 +1,16 @@
-import { CreatePackDataType, GetPacksParamsType, UpdatePackDataType } from './apiDataTypes'
+import { instance } from './instances'
+
+import {
+  CreatePackDataType,
+  GetPacksParamsType,
+  UpdatePackDataType,
+} from 'dal/api/Types/apiDataTypes'
 import {
   CreatePackResponseType,
   DeletePackResponseType,
   GetPacksResponseType,
   UpdatePackResponseType,
-} from './apiResponseTypes'
-import { instance } from './instances'
+} from 'dal/api/Types/apiResponseTypes'
 
 export const packsAPI = {
   getPacks(params: GetPacksParamsType) {
