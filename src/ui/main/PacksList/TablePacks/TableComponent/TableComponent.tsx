@@ -15,6 +15,7 @@ import s from './/TableComponent.module.css'
 
 import { useAppSelector } from 'common/hooks/useAppSelector'
 import { DeletePackModal } from 'ui/modals/packModal/DeletePackModal'
+import { EditPackModal } from 'ui/modals/packModal/EditPackModal'
 
 export const TableComponent = () => {
   const cardPacks = useAppSelector(state => state.packs.cardPacks)
@@ -54,6 +55,7 @@ export const TableComponent = () => {
                   {myId === userId ? (
                     <div>
                       <DeletePackModal packName={d.name} packId={d._id} />
+                      <EditPackModal packName={d.name} packId={d._id} />
                     </div>
                   ) : (
                     <div></div>

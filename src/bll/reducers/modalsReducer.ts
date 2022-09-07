@@ -1,12 +1,18 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+
+import { RequestStatusType } from 'bll/reducers/appReducer'
 
 //THUNKS
 
 const slice = createSlice({
   name: 'modals',
-  initialState: {},
-  reducers: {},
+  initialState: { addPackModal: false },
+  reducers: {
+    setAddPackModal(state, action) {
+      state.addPackModal = action.payload
+    },
+  },
 })
 
 export const modalsReducer = slice.reducer
-export const {} = slice.actions
+export const { setAddPackModal } = slice.actions

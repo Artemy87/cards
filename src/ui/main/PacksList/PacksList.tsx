@@ -5,6 +5,7 @@ import { Navigate } from 'react-router-dom'
 import style from './PacksList.module.css'
 
 import { getPacksTC } from 'bll/reducers/packsReducer'
+import { modal } from 'common/enum/modal'
 import { useAppDispatch } from 'common/hooks/useAppDispatch'
 import { useAppSelector } from 'common/hooks/useAppSelector'
 import { TablePacks } from 'ui/main/PacksList/TablePacks/TablePacks'

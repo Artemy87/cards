@@ -6,8 +6,10 @@ import FormGroup from '@mui/material/FormGroup'
 import TextField from '@mui/material/TextField'
 import { useFormik } from 'formik'
 
+import { updatePackTC } from 'bll/reducers/packsReducer'
 import { modal } from 'common/enum/modal'
 import { useAppDispatch } from 'common/hooks/useAppDispatch'
+import { useAppSelector } from 'common/hooks/useAppSelector'
 import { CustomModal } from 'ui/modals/CustomModal'
 import style from 'ui/modals/CustomModal.module.css'
 
@@ -16,11 +18,18 @@ type FormikErrorType = {
   privatePack?: boolean
 }
 
-export const EditPackModal = () => {
+type EditPackModalType = {
+  packName: string
+  packId: string
+}
+
+export const EditPackModal: React.FC<EditPackModalType> = ({ packName, packId }) => {
   const dispatch = useAppDispatch()
+  const page = useAppSelector(state => state.packs.page)
+  const pageCount = useAppSelector(state => state.packs.pageCount)
   const formik = useFormik({
     initialValues: {
-      namePack: '',
+      namePack: packName,
       privatePack: false,
     },
     validate: values => {
@@ -28,15 +37,24 @@ export const EditPackModal = () => {
 
       if (!values.namePack) {
         errors.namePack = 'Required'
-      } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.namePack)) {
+      } else if (values.namePack.length < 1) {
         errors.namePack = 'Invalid email address'
       }
 
       return errors
     },
     onSubmit: values => {
-      // dispatch(loginTC(values))
-      formik.resetForm()
+      dispatch(
+        updatePackTC({
+          data: {
+            _id: packId,
+            name: values.namePack,
+            private: values.privatePack,
+            deckCover: '',
+          },
+          getPacksData: { page, pageCount },
+        })
+      )
     },
   })
 
@@ -44,7 +62,12 @@ export const EditPackModal = () => {
     <CustomModal modalName={modal.EDIT_PACK}>
       <form onSubmit={formik.handleSubmit}>
         <FormGroup>
-          <TextField label="Name pack" margin="normal" {...formik.getFieldProps('namePack')} />
+          <TextField
+            label="Name pack"
+            placeholder={packName}
+            margin="normal"
+            {...formik.getFieldProps('namePack')}
+          />
           {formik.touched.namePack && formik.errors.namePack && (
             <div style={{ color: 'red' }}>{formik.errors.namePack} </div>
           )}

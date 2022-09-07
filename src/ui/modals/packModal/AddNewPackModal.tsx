@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ReactNode, useState } from 'react'
 
 import Checkbox from '@mui/material/Checkbox'
 import FormControlLabel from '@mui/material/FormControlLabel'
@@ -6,6 +6,7 @@ import FormGroup from '@mui/material/FormGroup'
 import TextField from '@mui/material/TextField'
 import { useFormik } from 'formik'
 
+import { setAddPackModal } from 'bll/reducers/modalsReducer'
 import { createPackTC } from 'bll/reducers/packsReducer'
 import { modal } from 'common/enum/modal'
 import { useAppDispatch } from 'common/hooks/useAppDispatch'
@@ -50,28 +51,31 @@ export const AddNewPackModal = () => {
           getPacksData: { page, pageCount },
         })
       )
+      formik.resetForm()
     },
   })
 
   return (
-    <CustomModal modalName={modal.ADD_PACK}>
-      <form onSubmit={formik.handleSubmit}>
-        <FormGroup>
-          <TextField label="Name pack" margin="normal" {...formik.getFieldProps('packName')} />
-          {formik.touched.packName && formik.errors.packName && (
-            <div style={{ color: 'red' }}>{formik.errors.packName} </div>
-          )}
-          <FormControlLabel
-            label={'Private pack'}
-            control={<Checkbox {...formik.getFieldProps('privatePack ')} />}
-          />
-          <div className={style.buttons}>
-            <button className={style.buttonSave} type={'submit'}>
-              Save
-            </button>
-          </div>
-        </FormGroup>
-      </form>
-    </CustomModal>
+    <>
+      <CustomModal modalName={modal.ADD_PACK}>
+        <form onSubmit={formik.handleSubmit}>
+          <FormGroup>
+            <TextField label="Name pack" margin="normal" {...formik.getFieldProps('packName')} />
+            {formik.touched.packName && formik.errors.packName && (
+              <div style={{ color: 'red' }}>{formik.errors.packName} </div>
+            )}
+            <FormControlLabel
+              label={'Private pack'}
+              control={<Checkbox {...formik.getFieldProps('privatePack ')} />}
+            />
+            <div className={style.buttons}>
+              <button className={style.buttonSave} type={'submit'}>
+                Save
+              </button>
+            </div>
+          </FormGroup>
+        </form>
+      </CustomModal>
+    </>
   )
 }

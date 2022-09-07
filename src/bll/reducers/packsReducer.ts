@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
 import { packsAPI } from 'dal/api/packsApi'
-import { CreatePackDataType } from 'dal/api/Types/apiDataTypes'
+import { CreatePackDataType, UpdatePackDataType } from 'dal/api/Types/apiDataTypes'
 import { GetPacksResponseType } from 'dal/api/Types/apiResponseTypes'
 
 //THUNKS
@@ -18,6 +18,18 @@ export const createPackTC = createAsyncThunk(
     { dispatch }
   ) => {
     await packsAPI.createPack(params.data)
+
+    dispatch(getPacksTC(params.getPacksData))
+  }
+)
+
+export const updatePackTC = createAsyncThunk(
+  'updatePack',
+  async (
+    params: { data: UpdatePackDataType; getPacksData: { page: number; pageCount: number } },
+    { dispatch }
+  ) => {
+    await packsAPI.updatePack(params.data)
 
     dispatch(getPacksTC(params.getPacksData))
   }
