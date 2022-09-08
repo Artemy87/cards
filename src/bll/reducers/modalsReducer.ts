@@ -1,7 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
-import { UpdatePackDataType } from 'dal/api/Types/apiDataTypes'
-
 //THUNK
 export const updatePackModalTC = createAsyncThunk(
   'updatePack',

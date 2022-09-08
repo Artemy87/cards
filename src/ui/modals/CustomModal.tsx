@@ -46,9 +46,6 @@ export const CustomModal: React.FC<CustomModalPropsType> = ({
           </div>
           <hr />
           {children}
-          <button className={style.buttonCancel} onClick={handleClose}>
-            Cancel
-          </button>
         </Box>
       </Modal>
     </div>
