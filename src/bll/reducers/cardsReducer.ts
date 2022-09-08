@@ -1,13 +1,17 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
+import { setAppStatus } from './appReducer'
+
 import { cardsAPI } from 'dal/api/cardsApi'
 import { GetCardsResponseType } from 'dal/api/Types/apiResponseTypes'
 
 //THUNKS
 export const getCardsTC = createAsyncThunk('getCards', async (data: any, { dispatch }) => {
+  dispatch(setAppStatus({ status: 'loading' }))
   const res = await cardsAPI.getCards(data)
 
   dispatch(getCardsAC(res.data.cards))
+  dispatch(setAppStatus({ status: 'succeeded' }))
 })
 
 const slice = createSlice({

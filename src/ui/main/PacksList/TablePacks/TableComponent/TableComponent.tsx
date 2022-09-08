@@ -66,13 +66,12 @@ export const TableComponent = () => {
                 <TableCell>{convertedDate}</TableCell>
                 <TableCell style={{ width: '140px' }}>{d.user_name}</TableCell>
                 <TableCell>
-                  <img
-                    src={teacher}
-                    alt="teacher icon"
-                    onClick={() => studyCardsHandler(d._id, d.name)}
-                  />
                   <div>
-                    <img src={teacher} alt="teacher icon" />
+                    <img
+                      src={teacher}
+                      alt="teacher icon"
+                      onClick={() => studyCardsHandler(d._id, d.name)}
+                    />
                   </div>
                   {myId === userId ? (
                     <div>

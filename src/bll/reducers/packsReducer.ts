@@ -1,14 +1,18 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
+import { setAppStatus } from './appReducer'
+
 import { packsAPI } from 'dal/api/packsApi'
 import { CreatePackDataType, UpdatePackDataType } from 'dal/api/Types/apiDataTypes'
 import { GetPacksResponseType } from 'dal/api/Types/apiResponseTypes'
 
 //THUNKS
 export const getPacksTC = createAsyncThunk('getPacks', async (data: any, { dispatch }) => {
+  dispatch(setAppStatus({ status: 'loading' }))
   const res = await packsAPI.getPacks(data)
 
   dispatch(getPacksAC(res.data))
+  dispatch(setAppStatus({ status: 'succeeded' }))
 })
 
 export const createPackTC = createAsyncThunk(
