@@ -11,6 +11,7 @@ export const getPacksTC = createAsyncThunk('getPacks', async (data: any, { dispa
   dispatch(setAppStatus({ status: 'loading' }))
   const res = await packsAPI.getPacks(data)
 
+  console.log(data)
   dispatch(getPacksAC(res.data))
   dispatch(setAppStatus({ status: 'succeeded' }))
 })
@@ -78,6 +79,7 @@ const slice = createSlice({
     minCardsCount: 0,
     page: 1,
     pageCount: 10,
+    searchParams: { packName: '' },
   } as GetPacksResponseType,
   reducers: {
     getPacksAC(state, action) {
@@ -91,8 +93,11 @@ const slice = createSlice({
     setPageCount(state, action) {
       state.pageCount = action.payload
     },
+    setSearchParams(state, action) {
+      state.searchParams = action.payload
+    },
   },
 })
 
 export const packsReducer = slice.reducer
-export const { getPacksAC, setPage, setPageCount } = slice.actions
+export const { getPacksAC, setPage, setPageCount, setSearchParams } = slice.actions
