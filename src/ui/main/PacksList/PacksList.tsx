@@ -3,11 +3,12 @@ import React, { useEffect } from 'react'
 import Button from '@mui/material/Button'
 import { Navigate } from 'react-router-dom'
 
+import { setAddPackModal } from '../../../bll/reducers/modalsReducer'
+
 import style from './PacksList.module.css'
 // eslint-disable-next-line import/namespace
 import { Search } from './Search/Search'
 
-import { setAddPackModal } from 'bll/reducers/modalsReducer'
 import { getPacksTC } from 'bll/reducers/packsReducer'
 import { useAppDispatch } from 'common/hooks/useAppDispatch'
 import { useAppSelector } from 'common/hooks/useAppSelector'
