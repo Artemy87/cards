@@ -35,6 +35,11 @@ export type GetPacksResponseType = {
   minCardsCount: number | null
   page: number // выбранная страница
   pageCount: number // количество элементов на странице
+  searchParams: searchType
+}
+
+export type searchType = {
+  packName?: string
 }
 
 export type PackType = {

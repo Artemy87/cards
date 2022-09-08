@@ -1,9 +1,8 @@
 import React, { ChangeEvent, useEffect, useState } from 'react'
 
 import { TextField } from '@material-ui/core'
-import { useSearchParams } from 'react-router-dom'
 
-import { getPacksTC } from '../../../../bll/reducers/packsReducer'
+import { setSearchParams } from '../../../../bll/reducers/packsReducer'
 import { useAppDispatch } from '../../../../common/hooks/useAppDispatch'
 import { useDebounce } from '../../../../common/hooks/useDebounce'
 
@@ -12,28 +11,13 @@ type PropsType = {
 }
 
 export const Search: React.FC<PropsType> = ({ search }) => {
-  const [searchParams, setSearchParams] = useSearchParams()
-  const [value, setValue] = useState<string>(searchParams.get(search) || '')
-  const debouncedValue = useDebounce<string>(value)
+  // const [value, setValue] = useState<string>('')
+  // const debouncedValue = useDebounce<string>('')
   const dispatch = useAppDispatch()
 
   const onChangeHandler = (e: ChangeEvent<HTMLInputElement>): void => {
-    setValue(e.target.value)
+    dispatch(setSearchParams({ [search]: e.target.value }))
   }
-
-  useEffect(() => {
-    const urlParams: { packName?: string } = {}
-
-    if (debouncedValue) {
-      urlParams[search] = debouncedValue
-    } else searchParams.delete(search)
-
-    setSearchParams({
-      ...Object.fromEntries(searchParams),
-      ...urlParams,
-    })
-    dispatch(getPacksTC(urlParams))
-  }, [debouncedValue, search, searchParams, setSearchParams])
 
   return (
     <TextField
