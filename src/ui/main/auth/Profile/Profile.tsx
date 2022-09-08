@@ -1,8 +1,9 @@
 import React from 'react'
 
 import { Paper } from '@material-ui/core'
-import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace'
-import { Navigate, useNavigate } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
+
+import { BackToPackListButton } from '../../../common/BackToPackListButton/BackToPackListButton'
 
 import { useAppSelector } from 'common/hooks/useAppSelector'
 import { ButtonLogout } from 'ui/common/button-logout/ButtonLogout'
@@ -13,7 +14,6 @@ import pencil from 'ui/main/auth/Profile/images/Pencil.svg'
 import s from 'ui/main/auth/Profile/Profile.module.css'
 
 export const Profile = () => {
-  const navigate = useNavigate()
   const user = useAppSelector(state => state.userInfo.user)
   const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
 
@@ -23,17 +23,12 @@ export const Profile = () => {
 
   return (
     <div className={s.profileContainer}>
-      <div className={s.backToPacksList} onClick={() => navigate('/packs')}>
-        <div className={s.arrow}>
-          <KeyboardBackspaceIcon fontSize={'medium'} />
-        </div>
-        <div className={s.text}>Back to Packs List</div>
-      </div>
+      <BackToPackListButton />
       <Paper elevation={3} className={style.paper}>
         <div className={s.header}>Personal Information</div>
         <div className={s.imageGroup}>
           <img src={avatar} alt={'avatar'} />
-          <img src={addAvatar} alt={'addAvatar'} className={s.addAvatar} />
+          <img src={addAvatar} alt={'addAvatar'} className={s.avatar} />
         </div>
         <div className={s.nameGroup}>
           <div className={s.name}>{user.name}</div>

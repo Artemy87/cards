@@ -8,6 +8,7 @@ import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import dayjs from 'dayjs'
+import { useNavigate } from 'react-router-dom'
 
 import teacher from '../Images/teacher.svg'
 
@@ -20,16 +21,22 @@ export const TableComponent = () => {
   const cardPacks = useAppSelector(state => state.packs.cardPacks)
   const myId = useAppSelector(state => state.userInfo.user._id)
 
+  const navigate = useNavigate()
+
+  const studyCardsHandler = (cardsPack_id: string, packName: string) => {
+    navigate(`/training-cards/${cardsPack_id}/${packName}`)
+  }
+
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead className={s.tableHeadContainer}>
           <TableRow>
             <TableCell>Name</TableCell>
-            <TableCell>Cards</TableCell>
-            <TableCell>Last Updated</TableCell>
-            <TableCell>Created by</TableCell>
-            <TableCell>Actions</TableCell>
+            <TableCell align="right">Cards</TableCell>
+            <TableCell align="right">Last Updated</TableCell>
+            <TableCell align="right">Created by</TableCell>
+            <TableCell align="right">Actions</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -50,7 +57,11 @@ export const TableComponent = () => {
                 <TableCell>{convertedDate}</TableCell>
                 <TableCell style={{ width: '140px' }}>{d.user_name}</TableCell>
                 <TableCell>
-                  <img src={teacher} alt="teacher icon" />
+                  <img
+                    src={teacher}
+                    alt="teacher icon"
+                    onClick={() => studyCardsHandler(d._id, d.name)}
+                  />
                   {myId === userId ? (
                     <div>
                       <DeletePackModal packName={d.name} packId={d._id} />

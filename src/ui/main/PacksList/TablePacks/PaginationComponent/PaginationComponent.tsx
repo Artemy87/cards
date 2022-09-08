@@ -6,15 +6,15 @@ import MenuItem from '@mui/material/MenuItem'
 
 import s from './/PaginationComponent.module.css'
 
-import { getPacksAC, getPacksTC, setPage, setPageCount } from 'bll/reducers/packsReducer'
+import { setPage, setPageCount } from 'bll/reducers/packsReducer'
 import { useAppDispatch } from 'common/hooks/useAppDispatch'
 import { useAppSelector } from 'common/hooks/useAppSelector'
 
 export const PaginationComponent = () => {
   const dispatch = useAppDispatch()
+
   const page = useAppSelector(state => state.packs.page)
   const pageCount = useAppSelector(state => state.packs.pageCount)
-
   const totalCount = useAppSelector(state => state.packs.cardPacksTotalCount)
 
   const onChangeNumberPage = (event: React.ChangeEvent<unknown>, num: number) => {

@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit'
 import { combineReducers } from 'redux'
 import { ThunkAction, ThunkDispatch } from 'redux-thunk'
 
+import { cardsReducer } from '../reducers/cardsReducer'
 import { packsReducer } from '../reducers/packsReducer'
 
 import { appReducer } from 'bll/reducers/appReducer'
@@ -15,6 +16,7 @@ export const rootReducer = combineReducers({
   userInfo: profileReducer,
   packs: packsReducer,
   modals: modalsReducer,
+  cards: cardsReducer,
 })
 
 export const store = configureStore({
@@ -32,3 +34,6 @@ export type AppThunk<ReturnType = void> = ThunkAction<
   unknown,
   AppActionsType
 >
+
+// @ts-ignore
+window.store = store

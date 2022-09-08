@@ -1,31 +1,11 @@
-.backToPacksList {
-  display: flex;
-  justify-items: center;
+/*.personalInformationContainer {*/
+/*  width: 413px;*/
+/*  height: 360px;*/
+/*  margin-top: 12px;*/
+/*  margin-left: 30%;*/
+/*}*/
 
-  width: 180px;
-  margin-top: 24px;
-  margin-left: 168px;
-}
-.backToPacksList:hover {
-  cursor: pointer;
-}
-
-.arrow {
-  width: 24px;
-  height: 24px;
-}
-
-.text {
-  width: 126px;
-  height: 24px;
-  margin-left: 8px;
-}
-
-.personalInformationContainer {
-  width: 413px;
-  height: 360px;
-  margin-top: 12px;
-  margin-left: 30%;
+.profileContainer {
 }
 
 .header {
@@ -43,7 +23,7 @@
   margin-top: 30px;
 }
 
-.addAvatar {
+.avatar {
   margin-left: -30px;
 }
 
@@ -66,8 +46,4 @@
 .email {
   margin-top: 14px;
   margin-bottom: 29px;
-}
-
-.logOut {
-  margin-left: 10px;
 }

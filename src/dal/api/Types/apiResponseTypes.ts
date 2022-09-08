@@ -69,20 +69,24 @@ export type DeletePackResponseType = {
 
 //cards
 export type CardType = {
-  _id: string
-  __v: number
-  user_id: string
-  cardsPack_id: string
-  more_id: string
-  type: string
-  rating: number
-  question: string
   answer: string
-  grade: number
-  shots: number
+  answerImg: string
+  answerVideo: string
+  cardsPack_id: string
   comments: string
   created: string
+  grade: number
+  more_id: string
+  question: string
+  questionImg: string
+  questionVideo: string
+  rating: number
+  shots: number
+  type: string
   updated: string
+  user_id: string
+  __v: number
+  _id: string
 }
 
 export type GetCardsResponseType = {
