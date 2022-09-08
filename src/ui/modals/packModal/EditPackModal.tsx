@@ -79,7 +79,6 @@ export const EditPackModal = () => {
               control={<Checkbox {...formik.getFieldProps('privatePack ')} />}
             />
             <div className={style.buttons}>
-              <button className={style.buttonCancel}>Cancel</button>
               <button className={style.buttonSave} type={'submit'} color={'primary'}>
                 Save
               </button>
