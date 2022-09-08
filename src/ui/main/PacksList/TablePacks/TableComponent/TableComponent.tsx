@@ -9,17 +9,24 @@ import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import dayjs from 'dayjs'
 
+import edit from '../Images/edit-2.svg'
 import teacher from '../Images/teacher.svg'
+import trash from '../Images/trash.svg'
 
 import s from './/TableComponent.module.css'
 
+import { deletePackModalTC, updatePackModalTC } from 'bll/reducers/modalsReducer'
+import { useAppDispatch } from 'common/hooks/useAppDispatch'
 import { useAppSelector } from 'common/hooks/useAppSelector'
 import { DeletePackModal } from 'ui/modals/packModal/DeletePackModal'
 import { EditPackModal } from 'ui/modals/packModal/EditPackModal'
 
 export const TableComponent = () => {
+  const dispatch = useAppDispatch()
   const cardPacks = useAppSelector(state => state.packs.cardPacks)
   const myId = useAppSelector(state => state.userInfo.user._id)
+  const editPackModalOpen = useAppSelector(state => state.modals.editPackModal)
+  const deletePackModal = useAppSelector(state => state.modals.deletePackModal)
 
   return (
     <TableContainer component={Paper}>
@@ -37,6 +44,7 @@ export const TableComponent = () => {
           {cardPacks.map(d => {
             const convertedDate = dayjs(d.created).format('D MMM YYYY')
             const userId = d.user_id
+            const data = { id: d._id, name: d.name }
 
             return (
               <TableRow
@@ -51,11 +59,19 @@ export const TableComponent = () => {
                 <TableCell>{convertedDate}</TableCell>
                 <TableCell style={{ width: '140px' }}>{d.user_name}</TableCell>
                 <TableCell>
-                  <img src={teacher} alt="teacher icon" />
+                  <div>
+                    <img src={teacher} alt="teacher icon" />
+                  </div>
                   {myId === userId ? (
                     <div>
-                      <DeletePackModal packName={d.name} packId={d._id} />
-                      <EditPackModal packName={d.name} packId={d._id} />
+                      <div onClick={() => dispatch(updatePackModalTC(data))}>
+                        <img src={edit} alt="edit icon" />
+                      </div>
+                      {editPackModalOpen && <EditPackModal />}
+                      <div onClick={() => dispatch(deletePackModalTC(data))}>
+                        <img src={trash} alt="trash icon" />
+                      </div>
+                      {deletePackModal && <DeletePackModal />}
                     </div>
                   ) : (
                     <div></div>

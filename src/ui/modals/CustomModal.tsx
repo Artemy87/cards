@@ -24,24 +24,18 @@ const styleModal = {
 type CustomModalPropsType = {
   children: ReactNode
   modalName: modal
+  open: boolean
+  handleClose: () => void
 }
 
-export const CustomModal: React.FC<CustomModalPropsType> = ({ children, modalName }) => {
-  const [open, setOpen] = useState(false)
-
-  const handleOpen = () => {
-    setOpen(true)
-  }
-
-  const handleClose = () => {
-    setOpen(false)
-  }
-
+export const CustomModal: React.FC<CustomModalPropsType> = ({
+  children,
+  modalName,
+  open,
+  handleClose,
+}) => {
   return (
     <div>
-      <button className={style.button} style={{ width: '175px' }} onClick={handleOpen}>
-        {modalName}
-      </button>
       <Modal open={open} onClose={handleClose}>
         <Box sx={styleModal}>
           <div className={style.modalHeader}>

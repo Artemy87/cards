@@ -6,7 +6,7 @@ import FormGroup from '@mui/material/FormGroup'
 import TextField from '@mui/material/TextField'
 import { useFormik } from 'formik'
 
-import { setAddPackModal } from 'bll/reducers/modalsReducer'
+import { setAddPackModal, setEditPackModal } from 'bll/reducers/modalsReducer'
 import { createPackTC } from 'bll/reducers/packsReducer'
 import { modal } from 'common/enum/modal'
 import { useAppDispatch } from 'common/hooks/useAppDispatch'
@@ -23,6 +23,8 @@ export const AddNewPackModal = () => {
   const dispatch = useAppDispatch()
   const page = useAppSelector(state => state.packs.page)
   const pageCount = useAppSelector(state => state.packs.pageCount)
+  const open = useAppSelector(state => state.modals.addPackModal)
+  const closeAddPackModal = () => dispatch(setAddPackModal(false))
   const formik = useFormik({
     initialValues: {
       packName: '',
@@ -52,12 +54,13 @@ export const AddNewPackModal = () => {
         })
       )
       formik.resetForm()
+      closeAddPackModal()
     },
   })
 
   return (
     <>
-      <CustomModal modalName={modal.ADD_PACK}>
+      <CustomModal modalName={modal.ADD_PACK} open={open} handleClose={closeAddPackModal}>
         <form onSubmit={formik.handleSubmit}>
           <FormGroup>
             <TextField label="Name pack" margin="normal" {...formik.getFieldProps('packName')} />
