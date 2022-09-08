@@ -4,6 +4,8 @@ import Button from '@mui/material/Button'
 import { Navigate } from 'react-router-dom'
 
 import style from './PacksList.module.css'
+// eslint-disable-next-line import/namespace
+import { Search } from './Search/Search'
 
 import { setAddPackModal } from 'bll/reducers/modalsReducer'
 import { getPacksTC } from 'bll/reducers/packsReducer'
@@ -19,17 +21,13 @@ export const PacksList = () => {
   const pageCount = useAppSelector(state => state.packs.pageCount)
   const addPackModalOpen = useAppSelector(state => state.modals.addPackModal)
 
+  if (!isLoggedIn) {
+    return <Navigate to="/login" />
+  }
+
   useEffect(() => {
     dispatch(getPacksTC({ page, pageCount }))
   }, [page, pageCount])
-
-  if (!isLoggedIn) {
-    return <Navigate to="/login" />
-  }
-
-  if (!isLoggedIn) {
-    return <Navigate to="/login" />
-  }
 
   return (
     <div className={style.packsList}>
@@ -38,9 +36,9 @@ export const PacksList = () => {
         <Button onClick={() => dispatch(setAddPackModal(true))}>add pack</Button>
         {addPackModalOpen && <AddNewPackModal />}
       </div>
-      {/*<div className={style.navWrapper}>*/}
-      {/*  <Search search="packName" />*/}
-      {/*</div>*/}
+      <div className={style.navWrapper}>
+        <Search search="packName" />
+      </div>
       <TablePacks />
     </div>
   )
