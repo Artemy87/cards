@@ -1,0 +1,23 @@
+.backToPacksList {
+  display: flex;
+  justify-items: center;
+
+  width: 180px;
+  margin-top: 24px;
+  margin-left: 168px;
+}
+
+.backToPacksList:hover {
+  cursor: pointer;
+}
+
+.arrow {
+  width: 24px;
+  height: 24px;
+}
+
+.text {
+  width: 126px;
+  height: 24px;
+  margin-left: 8px;
+}

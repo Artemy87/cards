@@ -5,6 +5,8 @@ import 'ui/App.css'
 import { Backdrop, CircularProgress } from '@mui/material'
 import { Navigate, Route, Routes } from 'react-router-dom'
 
+import { TrainingCards } from './main/TrainingCards/TrainingCards'
+
 import { initializeApp } from 'bll/reducers/appReducer'
 import { useAppDispatch } from 'common/hooks/useAppDispatch'
 import { useAppSelector } from 'common/hooks/useAppSelector'
@@ -55,6 +57,7 @@ export function App() {
       <Routes>
         <Route path="/" element={<Navigate to={'/packs'} />} />
         <Route path="packs" element={<PacksList />} />
+        <Route path="training-cards/:cardsPack_id/:packName" element={<TrainingCards />} />
         <Route path="profile" element={<Profile />} />
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />

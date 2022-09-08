@@ -8,6 +8,7 @@ import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import dayjs from 'dayjs'
+import { useNavigate } from 'react-router-dom'
 
 import edit from '../Images/edit-2.svg'
 import teacher from '../Images/teacher.svg'
@@ -27,6 +28,12 @@ export const TableComponent = () => {
   const myId = useAppSelector(state => state.userInfo.user._id)
   const editPackModalOpen = useAppSelector(state => state.modals.editPackModal)
   const deletePackModal = useAppSelector(state => state.modals.deletePackModal)
+
+  const navigate = useNavigate()
+
+  const studyCardsHandler = (cardsPack_id: string, packName: string) => {
+    navigate(`/training-cards/${cardsPack_id}/${packName}`)
+  }
 
   return (
     <TableContainer component={Paper}>
@@ -59,6 +66,11 @@ export const TableComponent = () => {
                 <TableCell>{convertedDate}</TableCell>
                 <TableCell style={{ width: '140px' }}>{d.user_name}</TableCell>
                 <TableCell>
+                  <img
+                    src={teacher}
+                    alt="teacher icon"
+                    onClick={() => studyCardsHandler(d._id, d.name)}
+                  />
                   <div>
                     <img src={teacher} alt="teacher icon" />
                   </div>
