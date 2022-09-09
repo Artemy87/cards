@@ -79,7 +79,7 @@ const slice = createSlice({
     minCardsCount: 0,
     page: 1,
     pageCount: 10,
-    searchParams: { packName: '' },
+    queryParams: { packName: '', user_id: '' },
   } as GetPacksResponseType,
   reducers: {
     getPacksAC(state, action) {
@@ -93,11 +93,11 @@ const slice = createSlice({
     setPageCount(state, action) {
       state.pageCount = action.payload
     },
-    setSearchParams(state, action) {
-      state.searchParams = action.payload
+    setQueryParams(state, action) {
+      state.queryParams = action.payload
     },
   },
 })
 
 export const packsReducer = slice.reducer
-export const { getPacksAC, setPage, setPageCount, setSearchParams } = slice.actions
+export const { getPacksAC, setPage, setPageCount, setQueryParams } = slice.actions
