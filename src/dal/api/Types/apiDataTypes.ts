@@ -68,5 +68,11 @@ export type CardDataType = {
   answerVideo?: string
 }
 
+//grade
+export type GradeType = {
+  grade: number
+  card_id: string
+}
+
 export type CreateCardDataType = { cardsPack_id: string } & CardDataType
 export type UpdateCardDataType = { _id: string } & CardDataType

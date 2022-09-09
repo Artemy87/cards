@@ -3,6 +3,7 @@ import { combineReducers } from 'redux'
 import { ThunkAction, ThunkDispatch } from 'redux-thunk'
 
 import { cardsReducer } from '../reducers/cardsReducer'
+import { gradeReducer } from '../reducers/gradeReducer'
 import { packsReducer } from '../reducers/packsReducer'
 
 import { appReducer } from 'bll/reducers/appReducer'
@@ -17,6 +18,7 @@ export const rootReducer = combineReducers({
   packs: packsReducer,
   modals: modalsReducer,
   cards: cardsReducer,
+  grade: gradeReducer,
 })
 
 export const store = configureStore({

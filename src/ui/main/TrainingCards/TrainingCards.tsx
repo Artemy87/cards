@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from 'react'
 
-import { Paper } from '@material-ui/core'
+import { FormControl, FormControlLabel, Paper, Radio, RadioGroup } from '@material-ui/core'
 import Button from '@mui/material/Button'
 import { useParams } from 'react-router-dom'
 
-import { getCardsTC } from '../../../bll/reducers/cardsReducer'
-import { useAppDispatch } from '../../../common/hooks/useAppDispatch'
-import { useAppSelector } from '../../../common/hooks/useAppSelector'
 import { BackToPackListButton } from '../../common/BackToPackListButton/BackToPackListButton'
 
 import s from './TrainingCards.module.css'
 
+import { getCardsTC } from 'bll/reducers/cardsReducer'
+import { updateGradeTC } from 'bll/reducers/gradeReducer'
+import { useAppDispatch } from 'common/hooks/useAppDispatch'
+import { useAppSelector } from 'common/hooks/useAppSelector'
 import { CardType } from 'dal/api/Types/apiResponseTypes'
-
-const grades = ['Did not know', 'Forgot', 'A lot of thought', 'Confused', 'Knew the answer']
 
 const getCard = (cards: CardType[]) => {
   const sum = cards.reduce((acc, card) => acc + (6 - card.grade) * (6 - card.grade), 0)
@@ -31,15 +30,17 @@ const getCard = (cards: CardType[]) => {
 }
 
 export const TrainingCards = () => {
+  console.log('TrainingCards called')
   const dispatch = useAppDispatch()
 
   let { cardsPack_id, packName } = useParams()
 
   const cards = useAppSelector(state => state.cards.cards)
 
+  console.log('shot cards', cards[0].shots)
   const [isChecked, setIsChecked] = useState<boolean>(false)
   const [first, setFirst] = useState<boolean>(true)
-  // const [first, setFirst] = useState<boolean>(0)
+  const [grade, setGrade] = useState(1)
   const [card, setCard] = useState<CardType>({
     answer: '',
     answerImg: '',
@@ -61,6 +62,8 @@ export const TrainingCards = () => {
     _id: '',
   })
 
+  console.log(cards)
+
   useEffect(() => {
     console.log('LearnContainer useEffect')
 
@@ -69,7 +72,6 @@ export const TrainingCards = () => {
       setFirst(false)
     }
 
-    console.log('cards', cards)
     if (cards.length > 0) setCard(getCard(cards))
 
     return () => {
@@ -81,12 +83,16 @@ export const TrainingCards = () => {
     setIsChecked(false)
 
     if (cards.length > 0) {
-      // dispatch
-
+      dispatch(updateGradeTC({ grade, card_id: card._id }))
+      dispatch(getCardsTC({ cardsPack_id, pageCount: 1000 }))
       setCard(getCard(cards))
     } else {
-      console.log('')
+      console.log('error updateGradeTC')
     }
+  }
+
+  const setGradeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setGrade(Number((event.target as HTMLInputElement).value))
   }
 
   return (
@@ -102,7 +108,7 @@ export const TrainingCards = () => {
             <div className={s.question}>{card.question}</div>
           </div>
           <div className={s.numberOfAttempts}>
-            Количество попыток ответов на вопрос: {'{count}'}
+            Количество попыток ответов на вопрос: {card.shots}
           </div>
           {!isChecked ? (
             <Button
@@ -119,16 +125,21 @@ export const TrainingCards = () => {
                 <div className={s.answer}>{card.answer}</div>
               </div>
               <div style={{ marginTop: '24px' }}>Rate yourself</div>
-              <ul>
-                {grades.map((grade, ind) => {
-                  return (
-                    <li key={ind} style={{ display: 'flex' }}>
-                      <input type="checkbox" />
-                      <div>{grade}</div>
-                    </li>
-                  )
-                })}
-              </ul>
+              <FormControl>
+                <RadioGroup
+                  aria-labelledby="demo-controlled-radio-buttons-group"
+                  name="controlled-radio-buttons-group"
+                  value={grade}
+                  onChange={setGradeHandler}
+                >
+                  <FormControlLabel value={1} control={<Radio />} label="Did not know" />
+                  <FormControlLabel value={2} control={<Radio />} label="Forgot" />
+                  <FormControlLabel value={3} control={<Radio />} label="A lot of thought" />
+                  <FormControlLabel value={4} control={<Radio />} label="Confused" />
+                  <FormControlLabel value={5} control={<Radio />} label="Knew the answer" />
+                </RadioGroup>
+              </FormControl>
+
               <Button variant={'contained'} className={s.buttonsShowAnswer} onClick={onNext}>
                 Next
               </Button>

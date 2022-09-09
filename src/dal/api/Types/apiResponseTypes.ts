@@ -115,3 +115,14 @@ export type UpdateCardResponseType = {
 export type DeleteCardResponseType = {
   deletedCard: CardType
 }
+
+export type UpdateGradeOfCardsResponseType = {
+  updatedGrade: {
+    _id: string
+    cardsPack_id: string
+    card_id: string
+    user_id: string
+    grade: number
+    shots: number
+  }
+}
