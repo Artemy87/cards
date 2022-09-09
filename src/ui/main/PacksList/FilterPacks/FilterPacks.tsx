@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import ButtonGroup from '@mui/material/ButtonGroup/ButtonGroup'
 
@@ -6,7 +6,6 @@ import { setQueryParams } from '../../../../bll/reducers/packsReducer'
 import { useAppDispatch } from '../../../../common/hooks/useAppDispatch'
 import { useAppSelector } from '../../../../common/hooks/useAppSelector'
 
-// eslint-disable-next-line import/namespace
 import { FilterButton } from './FilterButton/FilterButton'
 
 export const FilterPacks = () => {
@@ -19,6 +18,10 @@ export const FilterPacks = () => {
     setActive(!active)
     dispatch(setQueryParams({ ...queryParams, user_id: title === 'My' ? userId : '' }))
   }
+
+  useEffect(() => {
+    setActive(queryParams.user_id !== '')
+  }, [queryParams])
 
   const filterButtons = [
     <FilterButton key={'My'} state={active} title={'My'} handler={onClickHandler} />,
