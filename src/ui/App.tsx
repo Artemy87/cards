@@ -1,9 +1,11 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import 'ui/App.css'
 
 import { Backdrop, CircularProgress } from '@mui/material'
 import { Navigate, Route, Routes } from 'react-router-dom'
+
+import { TrainingCards } from './main/TrainingCards/TrainingCards'
 
 import { initializeApp } from 'bll/reducers/appReducer'
 import { useAppDispatch } from 'common/hooks/useAppDispatch'
@@ -15,13 +17,13 @@ import PasswordRecovery from 'ui/main/auth/Password-recovery/PasswordRecovery'
 import Password from 'ui/main/auth/Password/Password'
 import { Profile } from 'ui/main/auth/Profile/Profile'
 import { Register } from 'ui/main/auth/Register/Register'
-import { PacksList } from 'ui/main/packs-list/PacksList'
+import { PacksList } from 'ui/main/PacksList/PacksList'
 
 export function App() {
   const dispatch = useAppDispatch()
   const isInitialized = useAppSelector(state => state.app.isInitialized)
   const status = useAppSelector(state => state.app.status)
-  const [open, setOpen] = React.useState(false)
+  const [open, setOpen] = useState(false)
 
   useEffect(() => {
     dispatch(initializeApp())
@@ -55,6 +57,7 @@ export function App() {
       <Routes>
         <Route path="/" element={<Navigate to={'/packs'} />} />
         <Route path="packs" element={<PacksList />} />
+        <Route path="training-cards/:cardsPack_id/:packName" element={<TrainingCards />} />
         <Route path="profile" element={<Profile />} />
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />

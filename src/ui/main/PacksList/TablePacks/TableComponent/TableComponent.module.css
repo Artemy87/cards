@@ -1,0 +1,9 @@
+.tableHeadContainer {
+  background: #d7e5e1;
+}
+
+.tableRowContent .tableBodyName {
+  width: 30%;
+
+  word-break: break-word;
+}

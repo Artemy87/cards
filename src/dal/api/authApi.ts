@@ -1,6 +1,11 @@
-import { LoginParamsType, RegisterType } from './apiDataTypes'
-import { InfoResponseType, MeResponseType, RegisterResponseType } from './apiResponseTypes'
 import { instance } from './instances'
+
+import { LoginParamsType, RegisterType } from 'dal/api/Types/apiDataTypes'
+import {
+  InfoResponseType,
+  MeResponseType,
+  RegisterResponseType,
+} from 'dal/api/Types/apiResponseTypes'
 
 export const authApi = {
   login(data: LoginParamsType) {

@@ -1,4 +1,6 @@
 //auth
+import { PacksParamsType } from './apiDataTypes'
+
 export type InfoResponseType = {
   info: string
   error: string
@@ -33,8 +35,9 @@ export type GetPacksResponseType = {
   cardPacksTotalCount: number | undefined // количество колод
   maxCardsCount: number | null
   minCardsCount: number | null
-  page: number | undefined // выбранная страница
-  pageCount: number | null // количество элементов на странице
+  page: number // выбранная страница
+  pageCount: number // количество элементов на странице
+  queryParams: PacksParamsType
 }
 
 export type PackType = {
@@ -69,20 +72,24 @@ export type DeletePackResponseType = {
 
 //cards
 export type CardType = {
-  _id: string
-  __v: number
-  user_id: string
-  cardsPack_id: string
-  more_id: string
-  type: string
-  rating: number
-  question: string
   answer: string
-  grade: number
-  shots: number
+  answerImg: string
+  answerVideo: string
+  cardsPack_id: string
   comments: string
   created: string
+  grade: number
+  more_id: string
+  question: string
+  questionImg: string
+  questionVideo: string
+  rating: number
+  shots: number
+  type: string
   updated: string
+  user_id: string
+  __v: number
+  _id: string
 }
 
 export type GetCardsResponseType = {
@@ -110,4 +117,15 @@ export type UpdateCardResponseType = {
 
 export type DeleteCardResponseType = {
   deletedCard: CardType
+}
+
+export type UpdateGradeOfCardsResponseType = {
+  updatedGrade: {
+    _id: string
+    cardsPack_id: string
+    card_id: string
+    user_id: string
+    grade: number
+    shots: number
+  }
 }

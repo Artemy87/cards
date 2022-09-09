@@ -1,18 +1,18 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-import { LoginParamsType, RegisterType } from '../../dal/api/apiDataTypes'
-import { UserType } from '../../dal/api/apiResponseTypes'
-
-import { setAppError } from './appReducer'
+import { setAppError, setAppStatus } from './appReducer'
 
 import { sendUserInfoAC } from 'bll/reducers/profileReducer'
 import { authApi } from 'dal/api/authApi'
+import { LoginParamsType, RegisterType } from 'dal/api/Types/apiDataTypes'
+import { UserType } from 'dal/api/Types/apiResponseTypes'
 
 //THUNKS
 export const createUser = createAsyncThunk(
   'register/createUser',
   async (data: RegisterType, { dispatch }) => {
     try {
+      dispatch(setAppStatus({ status: 'loading' }))
       await authApi.register({ ...data, email: data.email.toLowerCase() })
       dispatch(loginTC({ ...data, rememberMe: false }))
     } catch (error) {
@@ -21,6 +21,8 @@ export const createUser = createAsyncThunk(
       if (err.length) {
         dispatch(setAppError(err))
       }
+    } finally {
+      dispatch(setAppStatus({ status: 'succeeded' }))
     }
   }
 )
@@ -28,10 +30,12 @@ export const createUser = createAsyncThunk(
 export const loginTC = createAsyncThunk(
   'auth/login',
   async (data: LoginParamsType, { dispatch }) => {
+    dispatch(setAppStatus({ status: 'loading' }))
     const res = await authApi.login(data)
 
     dispatch(sendUserInfoAC(res.data))
     dispatch(setIsLoggedInAC({ isLoggedIn: true }))
+    dispatch(setAppStatus({ status: 'succeeded' }))
   }
 )
 

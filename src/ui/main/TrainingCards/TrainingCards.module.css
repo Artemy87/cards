@@ -1,0 +1,85 @@
+.trainingCardsContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.backToPackListButton {
+  margin-left: 0;
+}
+
+.headerContainer {
+  margin-top: 75px;
+
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.paperContainer {
+  box-sizing: border-box;
+  width: 439px;
+  min-height: auto;
+  margin-top: 18px;
+  padding: 0 30px;
+}
+
+.questionContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  justify-content: center;
+
+  margin-top: 30px;
+}
+
+.questionHeader {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.question {
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.numberOfAttempts {
+  margin-top: 13px;
+
+  font-weight: 400;
+  color: #919191;
+}
+
+.buttonsShowAnswer {
+  width: 250px;
+}
+
+.answerContainer {
+  margin-top: 35px;
+}
+
+.paperContainer > button {
+  margin: 38px 0 28px 0;
+
+  border-radius: 15px;
+}
+
+.answerContainer > button {
+  margin: 38px 0 28px 0;
+
+  border-radius: 15px;
+}
+
+.answerGroup {
+  display: flex;
+}
+
+.answerHeader {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.answer {
+  /*width: 30%;*/
+
+  /*word-break: break-word;*/
+}
