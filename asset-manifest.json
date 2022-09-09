@@ -1,22 +1,23 @@
 {
   "files": {
-    "main.css": "/cards/static/css/main.bc019456.css",
-    "main.js": "/cards/static/js/main.f9cfa0d0.js",
+    "main.css": "/cards/static/css/main.a29c44c2.css",
+    "main.js": "/cards/static/js/main.ee560823.js",
     "static/js/787.42533a0b.chunk.js": "/cards/static/js/787.42533a0b.chunk.js",
     "static/media/Ellipse 45.png": "/cards/static/media/Ellipse 45.5eeb789f36b3dae97b3c.png",
     "static/media/Group 753.svg": "/cards/static/media/Group 753.66aa37dd1366aaf98fa95be1206c3b1e.svg",
+    "static/media/clear.svg": "/cards/static/media/clear.dd5367027974b9cff69a4b398bbf2442.svg",
     "static/media/trash.svg": "/cards/static/media/trash.bd70db32d2cf2e85278850c42a045cbc.svg",
     "static/media/edit-2.svg": "/cards/static/media/edit-2.80237abf8b3a40342bca9b516ae5808a.svg",
     "static/media/Pencil.svg": "/cards/static/media/Pencil.b7b54acc994e0accf08c89c5772774bf.svg",
     "static/media/teacher.svg": "/cards/static/media/teacher.98ddc8f9376c79b05bb474310295b927.svg",
     "static/media/logout.svg": "/cards/static/media/logout.819881059549eb959ed296b6cbf2861e.svg",
     "index.html": "/cards/index.html",
-    "main.bc019456.css.map": "/cards/static/css/main.bc019456.css.map",
-    "main.f9cfa0d0.js.map": "/cards/static/js/main.f9cfa0d0.js.map",
+    "main.a29c44c2.css.map": "/cards/static/css/main.a29c44c2.css.map",
+    "main.ee560823.js.map": "/cards/static/js/main.ee560823.js.map",
     "787.42533a0b.chunk.js.map": "/cards/static/js/787.42533a0b.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.bc019456.css",
-    "static/js/main.f9cfa0d0.js"
+    "static/css/main.a29c44c2.css",
+    "static/js/main.ee560823.js"
   ]
 }
