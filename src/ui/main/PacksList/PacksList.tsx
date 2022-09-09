@@ -5,6 +5,7 @@ import { Navigate } from 'react-router-dom'
 
 import { setAddPackModal } from '../../../bll/reducers/modalsReducer'
 
+import { ClearSettings } from './ClearSettings/ClearSettings'
 import { FilterPacks } from './FilterPacks/FilterPacks'
 import style from './PacksList.module.css'
 // eslint-disable-next-line import/namespace
@@ -42,6 +43,7 @@ export const PacksList = () => {
       <div className={style.navWrapper}>
         <Search search="packName" />
         <FilterPacks />
+        <ClearSettings />
       </div>
       <TablePacks />
     </div>

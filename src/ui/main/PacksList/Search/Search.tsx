@@ -16,6 +16,7 @@ type PropsType = {
 export const Search: React.FC<PropsType> = ({ search }) => {
   const [value, setValue] = useState<string>('')
   const debouncedValue = useDebounce<string>(value)
+
   const dispatch = useAppDispatch()
   const queryParams = useAppSelector(state => state.packs.queryParams)
 

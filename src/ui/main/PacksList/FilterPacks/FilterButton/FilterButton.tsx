@@ -2,6 +2,7 @@ import React from 'react'
 
 import Button from '@mui/material/Button/Button'
 
+import styles from './FilterButton.module.css'
 type PropsType = {
   state: boolean
   title: string
@@ -13,7 +14,7 @@ export const FilterButton: React.FC<PropsType> = ({ state, title, handler }) => 
   const onClickHandler = () => handler(title)
 
   return (
-    <Button variant={variant} onClick={onClickHandler}>
+    <Button variant={variant} onClick={onClickHandler} className={styles.filterButton}>
       {title}
     </Button>
   )
