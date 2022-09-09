@@ -1,4 +1,6 @@
 //auth
+import { PacksParamsType } from './apiDataTypes'
+
 export type InfoResponseType = {
   info: string
   error: string
@@ -35,11 +37,7 @@ export type GetPacksResponseType = {
   minCardsCount: number | null
   page: number // выбранная страница
   pageCount: number // количество элементов на странице
-  searchParams: searchType
-}
-
-export type searchType = {
-  packName?: string
+  queryParams: PacksParamsType
 }
 
 export type PackType = {
