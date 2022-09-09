@@ -5,6 +5,7 @@ import Button from '@mui/material/Button'
 import { useParams } from 'react-router-dom'
 
 import { BackToPackListButton } from '../../common/BackToPackListButton/BackToPackListButton'
+import { sortingCards } from '../../common/util/sortingCards'
 
 import s from './TrainingCards.module.css'
 
@@ -13,21 +14,6 @@ import { updateGradeTC } from 'bll/reducers/gradeReducer'
 import { useAppDispatch } from 'common/hooks/useAppDispatch'
 import { useAppSelector } from 'common/hooks/useAppSelector'
 import { CardType } from 'dal/api/Types/apiResponseTypes'
-
-const getCard = (cards: CardType[]) => {
-  const sum = cards.reduce((acc, card) => acc + (6 - card.grade) * (6 - card.grade), 0)
-  const rand = Math.random() * sum
-  const res = cards.reduce(
-    (acc: { sum: number; id: number }, card, i) => {
-      const newSum = acc.sum + (6 - card.grade) * (6 - card.grade)
-
-      return { sum: newSum, id: newSum < rand ? i : acc.id }
-    },
-    { sum: 0, id: -1 }
-  )
-
-  return cards[res.id + 1]
-}
 
 export const TrainingCards = () => {
   console.log('TrainingCards called')
@@ -72,7 +58,7 @@ export const TrainingCards = () => {
       setFirst(false)
     }
 
-    if (cards.length > 0) setCard(getCard(cards))
+    if (cards.length > 0) setCard(sortingCards(cards))
 
     return () => {
       console.log('LearnContainer useEffect off')
@@ -85,7 +71,7 @@ export const TrainingCards = () => {
     if (cards.length > 0) {
       dispatch(updateGradeTC({ grade, card_id: card._id }))
       dispatch(getCardsTC({ cardsPack_id, pageCount: 1000 }))
-      setCard(getCard(cards))
+      setCard(sortingCards(cards))
     } else {
       console.log('error updateGradeTC')
     }
