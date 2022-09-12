@@ -29,6 +29,28 @@ export type UserType = {
   error?: string
 }
 
+export type UpdateUserResponseType = {
+  updatedUser: UpdateUserType
+  token?: string
+  tokenDeathTime?: number
+}
+
+type UpdateUserType = {
+  avatar: string
+  created: string
+  email: string
+  isAdmin: false
+  name: string
+  publicCardPacksCount: number
+  rememberMe: false
+  token: string
+  tokenDeathTime: number
+  updated: string
+  verified: false
+  __v: number
+  _id: string
+}
+
 //packs
 export type GetPacksResponseType = {
   cardPacks: Array<PackType>

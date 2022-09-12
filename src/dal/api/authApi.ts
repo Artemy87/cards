@@ -5,6 +5,7 @@ import {
   InfoResponseType,
   MeResponseType,
   RegisterResponseType,
+  UpdateUserResponseType,
 } from 'dal/api/Types/apiResponseTypes'
 
 export const authApi = {
@@ -19,5 +20,8 @@ export const authApi = {
   },
   register(data: RegisterType) {
     return instance.post<RegisterResponseType>('auth/register', data)
+  },
+  updateUser(data: any) {
+    return instance.put<UpdateUserResponseType>('auth/me', data)
   },
 }
