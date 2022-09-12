@@ -2,8 +2,6 @@
   background: #d7e5e1;
 }
 
-.tableRowContent .tableBodyName {
-  width: 30%;
-
+.tableRowContent .tableBodyNam {
   word-break: break-word;
 }

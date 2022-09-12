@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { TableCell } from '@material-ui/core'
+import { TableCell, Tooltip } from '@material-ui/core'
 import Paper from '@mui/material/Paper'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
@@ -67,11 +67,17 @@ export const TableComponent = () => {
                 <TableCell style={{ width: '140px' }}>{d.user_name}</TableCell>
                 <TableCell>
                   <div>
-                    <img
-                      src={teacher}
-                      alt="teacher icon"
-                      onClick={() => studyCardsHandler(d._id, d.name)}
-                    />
+                    {d.cardsCount ? (
+                      <img
+                        src={teacher}
+                        alt="teacher icon"
+                        onClick={() => studyCardsHandler(d._id, d.name)}
+                      />
+                    ) : (
+                      <Tooltip title="No cards">
+                        <img src={teacher} alt="teacher icon" style={{ opacity: '0.43' }} />
+                      </Tooltip>
+                    )}
                   </div>
                   {myId === userId ? (
                     <div>

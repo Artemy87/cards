@@ -27,6 +27,10 @@ export const PacksList = () => {
     return <Navigate to="/login" />
   }
 
+  if (!isLoggedIn) {
+    return <Navigate to="/login" />
+  }
+
   return (
     <div className={style.packsList}>
       <div className={style.packsListHeader}>

@@ -1,0 +1,9 @@
+.buttonLogout {
+  width: 126px;
+  margin: 0 auto;
+
+  color: black;
+
+  border: 1px solid grey;
+  border-radius: 20px;
+}
