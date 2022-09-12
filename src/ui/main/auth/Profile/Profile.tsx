@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useState, KeyboardEvent } from 'react'
 
-import { Paper } from '@material-ui/core'
+import { Paper, TextField } from '@material-ui/core'
 import { Navigate } from 'react-router-dom'
 
 import { BackToPackListButton } from '../../../common/BackToPackListButton/BackToPackListButton'
 
+import { updateUserTC } from 'bll/reducers/authReducer'
+import { useAppDispatch } from 'common/hooks/useAppDispatch'
 import { useAppSelector } from 'common/hooks/useAppSelector'
 import { ButtonLogout } from 'ui/common/button-logout/ButtonLogout'
 import style from 'ui/main/auth/auth.module.css'
@@ -14,8 +16,31 @@ import pencil from 'ui/main/auth/Profile/images/Pencil.svg'
 import s from 'ui/main/auth/Profile/Profile.module.css'
 
 export const Profile = () => {
+  const dispatch = useAppDispatch()
+
+  const [toggle, setToggle] = useState(false)
+  const [newName, setNewName] = useState('')
+
   const user = useAppSelector(state => state.userInfo.user)
   const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
+  const name = useAppSelector(state => state.auth.updatedUser.name)
+
+  const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setNewName(e.currentTarget.value)
+  }
+
+  const onKeyPressHandler = (e: KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === 'Enter') {
+      updateName()
+    }
+  }
+
+  const updateName = () => {
+    if (newName.trim() !== '') {
+      dispatch(updateUserTC({ name: newName }))
+      setToggle(false)
+    }
+  }
 
   if (!isLoggedIn) {
     return <Navigate to="/login" />
@@ -31,9 +56,22 @@ export const Profile = () => {
           <img src={addAvatar} alt={'addAvatar'} className={s.avatar} />
         </div>
         <div className={s.nameGroup}>
-          <div className={s.name}>{user.name}</div>
+          {!toggle && <div className={s.name}>{name}</div>}
           <div className={s.pencilImage}>
-            <img src={pencil} alt="" />
+            {toggle ? (
+              <TextField
+                id="standard-basic"
+                label="Name"
+                variant="standard"
+                value={newName}
+                onChange={onChangeHandler}
+                onKeyPress={onKeyPressHandler}
+                onBlur={updateName}
+                autoFocus
+              />
+            ) : (
+              <img src={pencil} alt="" onClick={() => setToggle(true)} />
+            )}
           </div>
         </div>
         <div className={s.email}>{user.email}</div>

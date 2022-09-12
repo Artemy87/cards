@@ -10,6 +10,11 @@ export type RegisterType = {
   password: string
 }
 
+export type UpdateUserType = {
+  name: string
+  avatar?: string
+}
+
 //packs
 export type PacksParamsType = {
   packName?: string

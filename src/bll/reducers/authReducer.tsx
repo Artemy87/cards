@@ -4,8 +4,8 @@ import { setAppError, setAppStatus } from './appReducer'
 
 import { sendUserInfoAC } from 'bll/reducers/profileReducer'
 import { authApi } from 'dal/api/authApi'
-import { LoginParamsType, RegisterType } from 'dal/api/Types/apiDataTypes'
-import { UserType } from 'dal/api/Types/apiResponseTypes'
+import { LoginParamsType, RegisterType, UpdateUserType } from 'dal/api/Types/apiDataTypes'
+import { UpdateUserResponseType, UserType } from 'dal/api/Types/apiResponseTypes'
 
 //THUNKS
 export const createUser = createAsyncThunk(
@@ -39,7 +39,7 @@ export const loginTC = createAsyncThunk(
   }
 )
 
-export const logoutTC = createAsyncThunk('auth/logout', async (param, { dispatch }) => {
+export const logoutTC = createAsyncThunk('logout', async (param, { dispatch }) => {
   dispatch(setAppStatus({ status: 'succeeded' }))
   await authApi.logout()
 
@@ -48,16 +48,52 @@ export const logoutTC = createAsyncThunk('auth/logout', async (param, { dispatch
   dispatch(setAppStatus({ status: 'succeeded' }))
 })
 
+export const updateUserTC = createAsyncThunk(
+  'updateUser',
+  async (data: UpdateUserType, { dispatch }) => {
+    let res = await authApi.updateUser(data)
+
+    dispatch(updateName(res.data))
+  }
+)
+
+export const meTC = createAsyncThunk('me', async () => {
+  await authApi.me()
+})
+
 //Reducer
 const slice = createSlice({
   name: 'auth',
-  initialState: { isLoggedIn: false },
+  initialState: {
+    isLoggedIn: false,
+    updatedUser: {
+      avatar: '',
+      created: '',
+      email: '',
+      isAdmin: false,
+      name: '',
+      publicCardPacksCount: 0,
+      rememberMe: false,
+      token: '',
+      tokenDeathTime: 0,
+      updated: '',
+      verified: false,
+      __v: 0,
+      _id: '',
+    },
+    token: '',
+    tokenDeathTime: 0,
+  },
   reducers: {
     setIsLoggedInAC: (state, action: PayloadAction<{ isLoggedIn: boolean }>) => {
       state.isLoggedIn = action.payload.isLoggedIn
+    },
+    updateName: (state, action: PayloadAction<UpdateUserResponseType>) => {
+      console.log('action payload: ', action.payload)
+      state.updatedUser = action.payload.updatedUser
     },
   },
 })
 
 export const authReducer = slice.reducer
-export const { setIsLoggedInAC } = slice.actions
+export const { setIsLoggedInAC, updateName } = slice.actions

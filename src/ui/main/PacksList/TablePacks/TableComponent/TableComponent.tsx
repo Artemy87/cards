@@ -41,10 +41,10 @@ export const TableComponent = () => {
         <TableHead className={s.tableHeadContainer}>
           <TableRow>
             <TableCell>Name</TableCell>
-            <TableCell>Cards</TableCell>
-            <TableCell>Last Updated</TableCell>
-            <TableCell>Created by</TableCell>
-            <TableCell>Actions</TableCell>
+            <TableCell align="right">Cards</TableCell>
+            <TableCell align="right">Last Updated</TableCell>
+            <TableCell align="right">Created by</TableCell>
+            <TableCell align="center">Actions</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -62,10 +62,12 @@ export const TableComponent = () => {
                 <TableCell className={s.tableBodyName} component="th" scope="row">
                   {d.name}
                 </TableCell>
-                <TableCell>{d.cardsCount}</TableCell>
-                <TableCell>{convertedDate}</TableCell>
-                <TableCell style={{ width: '140px' }}>{d.user_name}</TableCell>
-                <TableCell>
+                <TableCell align="right">{d.cardsCount}</TableCell>
+                <TableCell align="right">{convertedDate}</TableCell>
+                <TableCell align="right" style={{ width: '140px' }}>
+                  {d.user_name}
+                </TableCell>
+                <TableCell align="center">
                   <div>
                     {d.cardsCount ? (
                       <img
