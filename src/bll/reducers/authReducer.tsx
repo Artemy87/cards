@@ -40,10 +40,12 @@ export const loginTC = createAsyncThunk(
 )
 
 export const logoutTC = createAsyncThunk('auth/logout', async (param, { dispatch }) => {
+  dispatch(setAppStatus({ status: 'succeeded' }))
   await authApi.logout()
 
   dispatch(sendUserInfoAC({} as UserType))
   dispatch(setIsLoggedInAC({ isLoggedIn: false }))
+  dispatch(setAppStatus({ status: 'succeeded' }))
 })
 
 //Reducer
