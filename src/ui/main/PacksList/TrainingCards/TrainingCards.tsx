@@ -4,8 +4,8 @@ import { FormControl, FormControlLabel, Paper, Radio, RadioGroup } from '@materi
 import Button from '@mui/material/Button'
 import { useParams } from 'react-router-dom'
 
-import { BackToPackListButton } from '../../common/BackToPackListButton/BackToPackListButton'
-import { sortingCards } from '../../common/util/sortingCards'
+import { BackToPackListButton } from '../../../common/BackToPackListButton/BackToPackListButton'
+import { randomCards } from '../../../common/util/randomCards'
 
 import s from './TrainingCards.module.css'
 
@@ -16,14 +16,12 @@ import { useAppSelector } from 'common/hooks/useAppSelector'
 import { CardType } from 'dal/api/Types/apiResponseTypes'
 
 export const TrainingCards = () => {
-  console.log('TrainingCards called')
   const dispatch = useAppDispatch()
 
   let { cardsPack_id, packName } = useParams()
 
   const cards = useAppSelector(state => state.cards.cards)
 
-  console.log('shot cards', cards[0].shots)
   const [isChecked, setIsChecked] = useState<boolean>(false)
   const [first, setFirst] = useState<boolean>(true)
   const [grade, setGrade] = useState(1)
@@ -48,30 +46,26 @@ export const TrainingCards = () => {
     _id: '',
   })
 
-  console.log(cards)
-
   useEffect(() => {
-    console.log('LearnContainer useEffect')
-
     if (first) {
       dispatch(getCardsTC({ cardsPack_id, pageCount: 1000 }))
       setFirst(false)
     }
 
-    if (cards.length > 0) setCard(sortingCards(cards))
+    if (cards.length > 0) setCard(randomCards(cards))
 
     return () => {
       console.log('LearnContainer useEffect off')
     }
   }, [dispatch, cardsPack_id, cards, first])
 
-  const onNext = () => {
+  const onNext = async () => {
     setIsChecked(false)
 
     if (cards.length > 0) {
-      dispatch(updateGradeTC({ grade, card_id: card._id }))
-      dispatch(getCardsTC({ cardsPack_id, pageCount: 1000 }))
-      setCard(sortingCards(cards))
+      await dispatch(updateGradeTC({ grade, card_id: card._id }))
+      await dispatch(getCardsTC({ cardsPack_id, pageCount: 1000 }))
+      setCard(randomCards(cards))
     } else {
       console.log('error updateGradeTC')
     }
@@ -125,7 +119,6 @@ export const TrainingCards = () => {
                   <FormControlLabel value={5} control={<Radio />} label="Knew the answer" />
                 </RadioGroup>
               </FormControl>
-
               <Button variant={'contained'} className={s.buttonsShowAnswer} onClick={onNext}>
                 Next
               </Button>

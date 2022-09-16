@@ -1,4 +1,7 @@
-.tablePacksContainer {
-  /*width: 1008px;*/
-  /*margin: 0 auto;*/
+.tableHeadContainer {
+  background: #d7e5e1;
+}
+
+.tableRowContent .tableBodyNam {
+  word-break: break-word;
 }

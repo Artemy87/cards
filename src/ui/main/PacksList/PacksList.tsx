@@ -8,12 +8,14 @@ import { setAddPackModal } from '../../../bll/reducers/modalsReducer'
 import { ClearSettings } from './ClearSettings/ClearSettings'
 import { FilterPacks } from './FilterPacks/FilterPacks'
 import style from './PacksList.module.css'
+// eslint-disable-next-line import/namespace
 import { Search } from './Search/Search'
+import { TablePacks } from './TablePacks/TablePacks'
+import { PaginationComponent } from './TablePagination/PaginationComponent'
 
 import { getPacksTC } from 'bll/reducers/packsReducer'
 import { useAppDispatch } from 'common/hooks/useAppDispatch'
 import { useAppSelector } from 'common/hooks/useAppSelector'
-import { TablePacks } from 'ui/main/PacksList/TablePacks/TablePacks'
 import { AddNewPackModal } from 'ui/modals/packModal/AddNewPackModal'
 
 export const PacksList = () => {
@@ -45,6 +47,7 @@ export const PacksList = () => {
         <ClearSettings />
       </div>
       <TablePacks />
+      <PaginationComponent />
     </div>
   )
 }

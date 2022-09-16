@@ -32,7 +32,7 @@ export const Search: React.FC<PropsType> = ({ search }) => {
     <TextField
       className={s.searchInput}
       id="outlined-basic"
-      label="Search"
+      label="Provide your text"
       variant="outlined"
       size="small"
       onChange={onChangeHandler}
