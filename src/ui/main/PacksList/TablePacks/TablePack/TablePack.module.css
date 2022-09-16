@@ -1,0 +1,33 @@
+.tablePacksContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+
+  max-width: 1008px;
+  margin: 0 auto;
+}
+
+.tableHeader {
+  margin-top: 75px;
+
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 27px;
+}
+
+.headerContainer {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  width: 1008px;
+}
+
+.searchContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: baseline;
+
+  margin-top: 27px;
+}

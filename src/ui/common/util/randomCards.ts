@@ -1,6 +1,6 @@
 import { CardType } from 'dal/api/Types/apiResponseTypes'
 
-export const sortingCards = (cards: CardType[]) => {
+export const randomCards = (cards: CardType[]) => {
   const sum = cards.reduce((acc, card) => acc + (6 - card.grade) * (6 - card.grade), 0)
   const rand = Math.random() * sum
   const res = cards.reduce(

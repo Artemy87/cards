@@ -11,7 +11,6 @@ export const getPacksTC = createAsyncThunk('getPacks', async (data: any, { dispa
   dispatch(setAppStatus({ status: 'loading' }))
   const res = await packsAPI.getPacks(data)
 
-  console.log(data)
   dispatch(getPacksAC(res.data))
   dispatch(setAppStatus({ status: 'succeeded' }))
 })
